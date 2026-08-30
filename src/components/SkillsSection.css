@@ -1,0 +1,150 @@
+.skills {
+  padding: 40px 0;
+}
+
+.skills__inner {
+  position: relative;
+}
+
+.skills__header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.skills__label {
+  display: block;
+  font-family: var(--font-condensed);
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+
+.skills__title {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.skills__title-script {
+  font-family: var(--font-script);
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-weight: 600;
+  color: var(--color-dusty-pink);
+  transform: rotate(-3deg);
+}
+
+.skills__title-editorial {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  color: var(--color-charcoal);
+  letter-spacing: -0.02em;
+}
+
+.skills__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 48px 80px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.skills__category {
+  position: relative;
+}
+
+.skills__category-title {
+  font-family: var(--font-condensed);
+  font-size: 0.75rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+
+.skills__divider {
+  width: 40px;
+  height: 1px;
+  background: var(--color-dusty-pink);
+  opacity: 0.4;
+  margin-bottom: 20px;
+}
+
+.skills__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.skills__item {
+  font-family: var(--font-editorial);
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: color var(--transition-fast), transform var(--transition-fast);
+}
+
+.skills__item:hover {
+  color: var(--color-dusty-pink);
+  transform: translateX(4px);
+}
+
+.skills__item-dot {
+  font-size: 0.5rem;
+  color: var(--color-dusty-pink);
+  opacity: 0.6;
+  flex-shrink: 0;
+}
+
+.skills__decor {
+  position: absolute;
+  bottom: -10px;
+  right: 10%;
+  width: 120px;
+  color: var(--color-dusty-pink);
+  opacity: 0.4;
+  transform: rotate(5deg);
+}
+
+.skills__decor svg {
+  width: 100%;
+  height: 100%;
+}
+
+@media (max-width: 768px) {
+  .skills {
+    padding: 20px 0;
+  }
+
+  .skills__header {
+    margin-bottom: 40px;
+  }
+
+  .skills__grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    max-width: 400px;
+  }
+
+  .skills__list {
+    gap: 12px;
+  }
+
+  .skills__item {
+    font-size: 1rem;
+  }
+
+  .skills__decor {
+    display: none;
+  }
+}

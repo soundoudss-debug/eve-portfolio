@@ -1,0 +1,52 @@
+.cursor-dot {
+  position: fixed;
+  width: 6px;
+  height: 6px;
+  background: var(--color-dusty-pink);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 10000;
+  transform: translate(-50%, -50%);
+  transition: opacity 200ms ease, transform 100ms ease;
+  mix-blend-mode: difference;
+}
+
+.cursor-ring {
+  position: fixed;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--color-dusty-pink);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: width 300ms var(--ease-smooth), height 300ms var(--ease-smooth), opacity 200ms ease, border-color 200ms ease, border-style 200ms ease;
+  opacity: 0;
+}
+
+.cursor-ring--hover {
+  width: 56px;
+  height: 56px;
+  border-color: var(--color-dusty-pink);
+  border-style: solid;
+  opacity: 0.7;
+}
+
+.cursor-ring--click {
+  width: 28px;
+  height: 28px;
+}
+
+@media (max-width: 768px), (pointer: coarse) {
+  .cursor-dot,
+  .cursor-ring {
+    display: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cursor-dot,
+  .cursor-ring {
+    display: none !important;
+  }
+}

@@ -1,0 +1,108 @@
+.video-placeholder {
+  position: relative;
+  width: 100%;
+  background: linear-gradient(135deg, rgba(201, 145, 138, 0.15), rgba(26, 24, 22, 0.08));
+  border: 1px solid rgba(201, 145, 138, 0.35);
+  overflow: hidden;
+  transition: transform var(--transition-medium), opacity var(--transition-medium);
+}
+
+.video-placeholder::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.06;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+.video-placeholder__inner {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+.video-placeholder__frame {
+  position: absolute;
+  inset: 24px;
+  pointer-events: none;
+}
+
+.video-placeholder__corner {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-color: var(--color-dusty-pink);
+  border-style: solid;
+  opacity: 0.4;
+}
+
+.video-placeholder__corner--tl {
+  top: 0;
+  left: 0;
+  border-width: 1px 0 0 1px;
+}
+
+.video-placeholder__corner--tr {
+  top: 0;
+  right: 0;
+  border-width: 1px 1px 0 0;
+}
+
+.video-placeholder__corner--bl {
+  bottom: 0;
+  left: 0;
+  border-width: 0 0 1px 1px;
+}
+
+.video-placeholder__corner--br {
+  bottom: 0;
+  right: 0;
+  border-width: 0 1px 1px 0;
+}
+
+.video-placeholder__label {
+  font-family: var(--font-condensed);
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.video-placeholder__ratio {
+  font-family: var(--font-condensed);
+  font-size: 0.6rem;
+  color: var(--text-muted);
+  letter-spacing: 0.15em;
+  opacity: 0.6;
+}
+
+.video-placeholder__video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.video-placeholder--active {
+  border-color: transparent;
+}
+
+.video-placeholder--active::before {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .video-placeholder__frame {
+    inset: 16px;
+  }
+
+  .video-placeholder__corner {
+    width: 14px;
+    height: 14px;
+  }
+}

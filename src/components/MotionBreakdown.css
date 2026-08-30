@@ -1,0 +1,25 @@
+.motion-breakdown {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px 24px;
+}
+
+.motion-breakdown__item {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.motion-breakdown__label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--text-secondary);
+  font-weight: 400;
+}
+
+@media (max-width: 768px) {
+  .motion-breakdown {
+    grid-template-columns: 1fr;
+  }
+}

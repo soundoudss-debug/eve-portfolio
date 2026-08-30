@@ -1,0 +1,60 @@
+:root {
+  --color-charcoal: #1a1816;
+  --color-charcoal-light: #2d2a27;
+  --color-graphite: #3d3835;
+  --color-warm-white: #f5f0ea;
+  --color-warm-white-dark: #e8e0d7;
+  --color-paper: #f5f0ea;
+  --color-paper-dark: #ebe4db;
+  --color-paper-gray: #e0d8cf;
+  --color-dusty-pink: #c9918a;
+  --color-dusty-blush: #d4a5a0;
+  --color-bubblegum-pink: #e8709a;
+  --color-soft-powder-pink: #f0c4d4;
+  --color-blush-pink: #e8b4b8;
+  --color-soft-pink: #f2d5d7;
+  --color-pale-pink: #f8e4e8;
+  --color-muted-red: #a85048;
+  --color-bright-red: #d64545;
+  --color-muted-lavender: #a89cc8;
+  --color-baby-blue: #9cc0d8;
+  --color-pale-mint: #a8d0c0;
+  --color-accent-orange: #e8956a;
+  --color-accent-yellow: #e8d07a;
+  --color-ink: #1a1816;
+
+  --text-primary: #1a1816;
+  --text-secondary: #5c5752;
+  --text-muted: #9a938c;
+  --text-accent: #c9918a;
+
+  --bg-primary: #f5f0ea;
+  --bg-secondary: #ebe4db;
+  --bg-elevated: #faf6f1;
+
+  --font-editorial: 'Playfair Display', 'Times New Roman', serif;
+  --font-editorial-italic: 'Playfair Display', 'Times New Roman', serif;
+  --font-condensed: 'Bebas Neue', 'Impact', sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-script: 'Dancing Script', 'Brush Script MT', cursive;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --nav-height: 80px;
+  --section-gap: 160px;
+  --content-max: 1400px;
+  --content-wide: 1600px;
+
+  --ease-editorial: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
+  --transition-fast: 250ms var(--ease-smooth);
+  --transition-medium: 500ms var(--ease-smooth);
+  --transition-slow: 800ms var(--ease-smooth);
+  --transition-editorial: 600ms var(--ease-editorial);
+}
+
+@media (max-width: 768px) {
+  :root {
+    --nav-height: 64px;
+    --section-gap: 100px;
+  }
+}
