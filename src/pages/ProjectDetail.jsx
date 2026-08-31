@@ -1,28 +1,36 @@
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useSearchParams } from 'react-router-dom';
 import { useLanguage, useLocalizedText } from '../context/LanguageContext';
-import { getProjectBySlug } from '../data/projects';
+import { getProjectBySlug, getAdjacentProjects, normalizeRole } from '../data/projects';
 import VideoPlaceholder from '../components/VideoPlaceholder';
-import ProcessGrid from '../components/ProcessGrid';
-import BreakdownGrid from '../components/BreakdownGrid';
-import MotionBreakdown from '../components/MotionBreakdown';
 import './ProjectDetail.css';
 
 export default function ProjectDetail() {
   const { slug } = useParams();
   const { t, lang } = useLanguage();
+  const [searchParams] = useSearchParams();
   const project = getProjectBySlug(slug);
+
+  const currentRole = normalizeRole(searchParams.get('role'));
+  const { prev, next } = getAdjacentProjects(slug, currentRole);
 
   const title = useLocalizedText(project?.title ?? { en: '', zh: '' });
   const category = useLocalizedText(project?.category ?? { en: '', zh: '' });
-  const about = useLocalizedText(project?.about ?? { en: '', zh: '' });
+  const description = useLocalizedText(project?.description ?? { en: '', zh: '' });
   const role = useLocalizedText(project?.role ?? { en: '', zh: '' });
+  const tags = useLocalizedText(project?.tags ?? { en: [], zh: [] });
+  const prevTitle = prev ? useLocalizedText(prev.title) : '';
+  const nextTitle = next ? useLocalizedText(next.title) : '';
+
+  const worksPath = currentRole === 'DEFAULT'
+    ? '/#works'
+    : `/?role=${currentRole.toLowerCase()}#works`;
 
   if (!project) {
     return (
       <div className="page project-detail">
         <div className="project-detail__not-found">
           <p>Project not found</p>
-          <Link to="/">{t.project.back}</Link>
+          <Link to={worksPath}>{t.project.back}</Link>
         </div>
       </div>
     );
@@ -30,50 +38,48 @@ export default function ProjectDetail() {
 
   return (
     <div className="page project-detail">
-      <div className="project-detail__hero">
-        <div className="project-detail__hero-overlay">
-          <div className="project-detail__hero-top">
-            <Link to="/#works" className="project-detail__back" data-cursor-hover>
-              <span className="project-detail__back-arrow">←</span>
-              <span>{t.project.back}</span>
-            </Link>
-            <span className="project-detail__issue">ISSUE N°{project.id}</span>
+      <div className="project-detail__inner">
+        <div className="project-detail__top-bar">
+          <Link to={worksPath} className="project-detail__back" data-cursor-hover>
+            <span className="project-detail__back-arrow">←</span>
+            <span>{t.project.back}</span>
+          </Link>
+          <span className="project-detail__issue">N°{project.id} / 2026</span>
+        </div>
+
+        <header className="project-detail__header">
+          <div className="project-detail__meta-row">
+            <span className="project-detail__category">{category}</span>
+            <span className="project-detail__divider-dot">✦</span>
+            <span className="project-detail__tags">
+              {Array.isArray(tags) ? tags.join(' · ') : ''}
+            </span>
           </div>
 
-          <div className="project-detail__hero-content">
-            <div className="project-detail__hero-meta">
-              <span className="project-detail__hero-category">{category}</span>
-              <span className="project-detail__hero-year">2026</span>
-            </div>
+          <h1 className="project-detail__title">
+            <span className="project-detail__title-script">
+              {title.split(' ')[0]?.toLowerCase() || title.toLowerCase()}
+            </span>
+            <span className="project-detail__title-main">
+              {title.split(' ').slice(1).join(' ') || title}
+            </span>
+          </h1>
 
-            <h1 className="project-detail__hero-title">
-              <span className="project-detail__hero-title-script">
-                {title.split(' ')[0]?.toLowerCase() || title.toLowerCase()}
-              </span>
-              <span className="project-detail__hero-title-main">
-                {title.split(' ').slice(1).join(' ') || title}
-              </span>
-            </h1>
+          <p className="project-detail__description">{description}</p>
+        </header>
 
-            <div className="project-detail__hero-info">
-              <div className="project-detail__hero-info-item">
-                <span className="project-detail__hero-info-label">{t.project.role}</span>
-                <span className="project-detail__hero-info-value">{role}</span>
-              </div>
-              <div className="project-detail__hero-info-item">
-                <span className="project-detail__hero-info-label">{t.project.tools}</span>
-                <span className="project-detail__hero-info-value">{project.tools.join(' · ')}</span>
-              </div>
-            </div>
-          </div>
-
-          <div className="project-detail__hero-decor project-detail__hero-decor--1" aria-hidden="true">
-            <span className="project-detail__decor-star">✦</span>
-          </div>
-          <div className="project-detail__hero-decor project-detail__hero-decor--2" aria-hidden="true">
-            <svg viewBox="0 0 150 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <div className="project-detail__video-wrap" data-cursor-hover>
+          <VideoPlaceholder
+            videoSrc={project.video}
+            coverSrc={project.cover}
+            aspectRatio="16/9"
+            controls
+            className="project-detail__video"
+          />
+          <div className="project-detail__video-decor" aria-hidden="true">
+            <svg viewBox="0 0 100 20" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path
-                d="M5 15 Q 30 5, 60 12 T 120 8 T 145 14"
+                d="M5 10 Q 25 2, 50 8 T 95 6"
                 stroke="currentColor"
                 strokeWidth="2"
                 strokeLinecap="round"
@@ -83,113 +89,75 @@ export default function ProjectDetail() {
           </div>
         </div>
 
-        <div className="project-detail__hero-video">
-          <VideoPlaceholder
-            label={t.works.comingSoon}
-            videoSrc={project.video}
-            coverSrc={project.cover}
-            aspectRatio="16/9"
-            controls
-          />
-        </div>
-      </div>
-
-      <div className="project-detail__content">
-        <section className="project-detail__section project-detail__section--about">
-          <div className="project-detail__section-header">
-            <span className="project-detail__section-number">— 01 —</span>
-            <h2 className="project-detail__section-title">
-              <span className="project-detail__section-title-script">about</span>
-              <br />
-              <span className="project-detail__section-title-editorial">the project</span>
-            </h2>
+        <div className="project-detail__info">
+          <div className="project-detail__info-item">
+            <span className="project-detail__info-label">{t.project.role}</span>
+            <span className="project-detail__info-value">{role}</span>
           </div>
-          <div className="project-detail__about-content">
-            <p className="project-detail__about-text">{about}</p>
-            <div className="project-detail__about-note" aria-hidden="true">
-              <span className="project-detail__note-script">note</span>
-              <svg viewBox="0 0 100 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M5 8 Q 25 2, 50 6 T 95 5"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  fill="none"
-                />
-              </svg>
-            </div>
+          <div className="project-detail__info-divider" />
+          <div className="project-detail__info-item">
+            <span className="project-detail__info-label">{t.project.tools}</span>
+            <span className="project-detail__info-value">{project.tools.join(' · ')}</span>
           </div>
-        </section>
-
-        <div className="project-detail__divider" aria-hidden="true">
-          <span className="project-detail__divider-star">✦ ✦ ✦</span>
         </div>
 
-        {project.isMotion && project.motionBreakdown && (
-          <section className="project-detail__section project-detail__section--breakdown">
-            <div className="project-detail__section-header">
-              <span className="project-detail__section-number">— 02 —</span>
-              <h2 className="project-detail__section-title">
-                <span className="project-detail__section-title-editorial">breakdown</span>
-                <br />
-                <span className="project-detail__section-title-script">of magic</span>
-              </h2>
-            </div>
-            <MotionBreakdown items={project.motionBreakdown} />
-          </section>
-        )}
+        <div className="project-detail__nav">
+          <div className="project-detail__nav-col">
+            {prev ? (
+              <Link
+                to={`/work/${prev.slug}${currentRole !== 'DEFAULT' ? `?role=${currentRole.toLowerCase()}` : ''}`}
+                className="project-detail__nav-link project-detail__nav-link--prev"
+                data-cursor-hover
+              >
+                <span className="project-detail__nav-arrow">←</span>
+                <div className="project-detail__nav-text">
+                  <span className="project-detail__nav-label">{lang === 'en' ? 'Previous' : '上一个'}</span>
+                  <span className="project-detail__nav-title">{prevTitle}</span>
+                </div>
+              </Link>
+            ) : (
+              <div className="project-detail__nav-link project-detail__nav-link--disabled">
+                <span className="project-detail__nav-arrow">←</span>
+                <div className="project-detail__nav-text">
+                  <span className="project-detail__nav-label">{lang === 'en' ? 'Previous' : '上一个'}</span>
+                  <span className="project-detail__nav-title">{lang === 'en' ? 'First project' : '已是第一个'}</span>
+                </div>
+              </div>
+            )}
+          </div>
 
-        {!project.isMotion && project.processSteps && (
-          <section className="project-detail__section project-detail__section--process">
-            <div className="project-detail__section-header">
-              <span className="project-detail__section-number">— 02 —</span>
-              <h2 className="project-detail__section-title">
-                <span className="project-detail__section-title-script">creative</span>
-                <br />
-                <span className="project-detail__section-title-editorial">process</span>
-              </h2>
-            </div>
-            <ProcessGrid steps={project.processSteps} />
-          </section>
-        )}
+          <Link to={worksPath} className="project-detail__nav-back" data-cursor-hover>
+            <span className="project-detail__nav-back-icon">✦</span>
+            <span>{t.project.back}</span>
+          </Link>
 
-        <div className="project-detail__callout" aria-hidden="true">
-          <span className="project-detail__callout-text">
-            {lang === 'en' ? 'visual storytelling at its finest' : '视觉叙事的极致'}
-          </span>
+          <div className="project-detail__nav-col">
+            {next ? (
+              <Link
+                to={`/work/${next.slug}${currentRole !== 'DEFAULT' ? `?role=${currentRole.toLowerCase()}` : ''}`}
+                className="project-detail__nav-link project-detail__nav-link--next"
+                data-cursor-hover
+              >
+                <div className="project-detail__nav-text">
+                  <span className="project-detail__nav-label">{lang === 'en' ? 'Next' : '下一个'}</span>
+                  <span className="project-detail__nav-title">{nextTitle}</span>
+                </div>
+                <span className="project-detail__nav-arrow">→</span>
+              </Link>
+            ) : (
+              <div className="project-detail__nav-link project-detail__nav-link--disabled">
+                <div className="project-detail__nav-text">
+                  <span className="project-detail__nav-label">{lang === 'en' ? 'Next' : '下一个'}</span>
+                  <span className="project-detail__nav-title">{lang === 'en' ? 'Last project' : '已是最后一个'}</span>
+                </div>
+                <span className="project-detail__nav-arrow">→</span>
+              </div>
+            )}
+          </div>
         </div>
 
-        {!project.isMotion && project.breakdownItems && (
-          <section className="project-detail__section project-detail__section--breakdown">
-            <div className="project-detail__section-header">
-              <span className="project-detail__section-number">— 03 —</span>
-              <h2 className="project-detail__section-title">
-                <span className="project-detail__section-title-editorial">technical</span>
-                <br />
-                <span className="project-detail__section-title-script">breakdown</span>
-              </h2>
-            </div>
-            <BreakdownGrid items={project.breakdownItems} />
-          </section>
-        )}
-
-        {project.isMotion && project.processSteps && (
-          <section className="project-detail__section project-detail__section--process">
-            <div className="project-detail__section-header">
-              <span className="project-detail__section-number">— 03 —</span>
-              <h2 className="project-detail__section-title">
-                <span className="project-detail__section-title-script">behind</span>
-                <br />
-                <span className="project-detail__section-title-editorial">the scenes</span>
-              </h2>
-            </div>
-            <ProcessGrid steps={project.processSteps} />
-          </section>
-        )}
-
-        <div className="project-detail__ending">
+        <div className="project-detail__ending" aria-hidden="true">
           <span className="project-detail__ending-script">fin.</span>
-          <div className="project-detail__ending-line" />
         </div>
       </div>
     </div>

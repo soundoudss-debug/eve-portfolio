@@ -1,100 +1,81 @@
 import { useEffect, useRef, useState } from 'react';
-import { useLanguage, useLocalizedText } from '../context/LanguageContext';
+import { useLanguage } from '../context/LanguageContext';
 import './VideoLightbox.css';
 
-export default function VideoLightbox({ videoSrc, coverSrc, title, onClose }) {
+export default function VideoLightbox({ project, onClose }) {
+  const { t, lang } = useLanguage();
   const videoRef = useRef(null);
-  const [hasVideo, setHasVideo] = useState(false);
-  const { t } = useLanguage();
-  const displayTitle = useLocalizedText(title || { en: '', zh: '' });
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    if (!videoSrc) {
-      setHasVideo(false);
-      return;
-    }
-    fetch(videoSrc, { method: 'HEAD' })
-      .then((res) => setHasVideo(res.ok))
-      .catch(() => setHasVideo(false));
-  }, [videoSrc]);
+    if (!project) return;
 
-  useEffect(() => {
-    const handleKey = (e) => {
-      if (e.key === 'Escape') onClose();
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        onClose();
+      }
     };
-    document.addEventListener('keydown', handleKey);
+
+    document.addEventListener('keydown', handleKeyDown);
     document.body.style.overflow = 'hidden';
+
     return () => {
-      document.removeEventListener('keydown', handleKey);
+      document.removeEventListener('keydown', handleKeyDown);
       document.body.style.overflow = '';
     };
-  }, [onClose]);
+  }, [project, onClose]);
+
+  if (!project) return null;
+
+  const title = project.title?.[lang] || project.title?.en || '';
+  const category = project.category?.[lang] || project.category?.en || '';
+
+  const handleOverlayClick = (e) => {
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
+  };
 
   return (
-    <div className="lightbox" onClick={onClose}>
-      <div className="lightbox__bg-decor" aria-hidden="true">
-        <div className="lightbox__star lightbox__star--1">✦</div>
-        <div className="lightbox__star lightbox__star--2">✧</div>
-        <div className="lightbox__scribble">
-          <svg viewBox="0 0 100 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path
-              d="M5 15 Q 25 5, 50 12 T 95 8"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              fill="none"
-            />
-          </svg>
-        </div>
-      </div>
-
-      <div className="lightbox__content" onClick={(e) => e.stopPropagation()}>
-        <button className="lightbox__close" onClick={onClose}>
-          <span className="lightbox__close-icon">×</span>
-          <span className="lightbox__close-label">close</span>
+    <div className="video-lightbox" onClick={handleOverlayClick}>
+      <div className="video-lightbox__grain" aria-hidden="true" />
+      
+      <div className="video-lightbox__inner">
+        <button
+          className="video-lightbox__close"
+          onClick={onClose}
+          aria-label="Close"
+        >
+          <span className="video-lightbox__close-text">CLOSE</span>
+          <span className="video-lightbox__close-icon">×</span>
         </button>
 
-        <div className="lightbox__header">
-          <span className="lightbox__label">— VIDEO PREVIEW —</span>
-          {displayTitle && (
-            <h3 className="lightbox__title">
-              <span className="lightbox__title-script">{displayTitle}</span>
-            </h3>
-          )}
+        <div className="video-lightbox__info">
+          <span className="video-lightbox__project-num">PROJECT {project.id}</span>
+          <span className="video-lightbox__category">{category}</span>
+          <span className="video-lightbox__year">2026</span>
         </div>
 
-        <div className="lightbox__video-container">
-          {hasVideo ? (
-            <video
-              ref={videoRef}
-              src={videoSrc}
-              poster={coverSrc || undefined}
-              controls
-              autoPlay
-              playsInline
-              className="lightbox__video"
+        <div className="video-lightbox__player">
+          {!isLoaded && project.cover && (
+            <img
+              src={project.cover}
+              alt=""
+              className="video-lightbox__poster"
             />
-          ) : (
-            <div className="lightbox__placeholder">
-              <span className="lightbox__placeholder-icon">✦</span>
-              <span className="lightbox__placeholder-text">{t.works.comingSoon}</span>
-            </div>
           )}
+          <video
+            ref={videoRef}
+            src={project.video}
+            controls
+            playsInline
+            className="video-lightbox__video"
+            onLoadedData={() => setIsLoaded(true)}
+          />
         </div>
 
-        <div className="lightbox__footer">
-          <span className="lightbox__footer-script">enjoy the show</span>
-          <div className="lightbox__footer-line">
-            <svg viewBox="0 0 200 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path
-                d="M5 5 Q 50 2, 100 5 T 195 4"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                fill="none"
-              />
-            </svg>
-          </div>
+        <div className="video-lightbox__title">
+          <h2>{title}</h2>
         </div>
       </div>
     </div>

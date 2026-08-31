@@ -16,6 +16,13 @@ export const translations = {
       title: 'SELECTED WORKS',
       viewProject: 'VIEW PROJECT',
       comingSoon: 'VIDEO COMING SOON',
+      roleLabel: 'PORTFOLIO VERSION',
+      roles: {
+        default: 'Default',
+        game: 'Game',
+        commercial: 'Commercial',
+        mcn: 'MCN',
+      },
     },
     project: {
       back: 'BACK TO WORK',
@@ -116,6 +123,13 @@ export const translations = {
       title: '精选作品',
       viewProject: '查看项目',
       comingSoon: '作品制作中',
+      roleLabel: '作品集版本',
+      roles: {
+        default: '默认',
+        game: '游戏',
+        commercial: '商业',
+        mcn: 'MCN',
+      },
     },
     project: {
       back: '返回作品',
