@@ -4,8 +4,8 @@ import { useScrollReveal } from '../hooks/useScrollReveal';
 import VideoPlaceholder from './VideoPlaceholder';
 import './ProjectCard.css';
 
-/* ===== 新增：hover 预览视频配置 ===== */
-const HOVER_DELAY = 200; // 200ms 防抖延时
+/* ========== Hover 预览交互常量 ========== */
+const HOVER_DELAY = 200; // 200ms 防抖：避免鼠标扫过就播放
 
 function isTouchDevice() {
   if (typeof window === 'undefined') return false;
@@ -17,45 +17,57 @@ export default function ProjectCard({
   index,
   layoutIndex,
   onClick,
-  /* ===== 新增 props ===== */
-  previewVideoSrc,   // 预览短视频地址，不传则不渲染 video 层
-  previewAudio = false, // 预览是否有声，默认 false（静音）
+  /* ========== Props 扩展：hover 预览短视频 ========== */
+  previewVideoSrc,   // 预览短视频地址；不传 → VideoPlaceholder 不渲染 <video>，保持旧卡片行为
+  previewAudio = false, // 预览是否有声；默认 false（静音）
 }) {
   const category = useLocalizedText(project.category);
   const revealRef = useScrollReveal();
-  /* ===== 新增：视频引用与防抖定时器 ===== */
-  const videoRef = useRef(null);
+
+  /* ========== Video 元素 ref（通过 forwardRef 指向 VideoPlaceholder 内部的 <video>） ========== */
+  const previewVideoRef = useRef(null);
+  /* ========== mouseenter 防抖定时器 ref ========== */
   const hoverTimerRef = useRef(null);
-  /* ===== 原有状态（保留） ===== */
+
+  /* ========== 原有卡片交互状态（保留） ========== */
   const [isHovered, setIsHovered] = useState(false);
   const [isPressed, setIsPressed] = useState(false);
-  /* ===== 新增：视频预览显示状态 ===== */
+
+  /* ========== Hover 预览显示状态 ==========
+     - 唯一真信号 → <video> 触发原生 'playing' 事件后 = true
+     - mouseleave / 视频 error / play Promise reject / 卸载 → 重置 false
+     - **绝对不因为 waiting buffering 变 false**（避免闪烁），poster 永远在下面兜底
+  */
   const [isPreviewPlaying, setIsPreviewPlaying] = useState(false);
 
-  /* ===== 新增：监听视频 playing/waiting 事件 ===== */
+  /* ========== 是否具备预览能力（必须有 videoSrc + 非触屏） ========== */
+  const canPreview = !!previewVideoSrc && !isTouchDevice();
+
+  /* ========== 规格 #4：只监听 'playing' 事件；禁止使用 'waiting' ==========
+     · playing = 视频真正开始出帧 → 此时将 video opacity 从 0 → 1 淡入，覆盖 poster
+     · error   = 加载失败 → 维持 poster，不淡出任何东西
+     · waiting = buffering，**故意不监听**：poster 全程保持在 video 底下不会消失
+  */
   useEffect(() => {
-    const video = videoRef.current;
+    const video = previewVideoRef.current;
     if (!video) return;
 
     const handlePlaying = () => {
       setIsPreviewPlaying(true);
     };
 
-    const handleWaiting = () => {
+    const handleError = () => {
       setIsPreviewPlaying(false);
     };
 
     video.addEventListener('playing', handlePlaying);
-    video.addEventListener('waiting', handleWaiting);
+    video.addEventListener('error', handleError);
 
     return () => {
       video.removeEventListener('playing', handlePlaying);
-      video.removeEventListener('waiting', handleWaiting);
+      video.removeEventListener('error', handleError);
     };
   }, []);
-
-  /* ===== 新增：是否启用预览（有视频源 + 非触屏） ===== */
-  const hasPreview = !!previewVideoSrc && !isTouchDevice();
 
   const layoutClasses = [
     'project-card--layout-0',
@@ -66,34 +78,38 @@ export default function ProjectCard({
     'project-card--layout-5',
   ];
 
-  /* ===== 原有点击逻辑（保留） ===== */
   const handleClick = () => {
-    if (onClick) {
-      onClick(project);
-    }
+    if (onClick) onClick(project);
   };
 
-  /* ===== 新增：开始预览 ===== */
+  /* ========== 规格 #5：startPreview() ==========
+     1) currentTime = 0
+     2) video.play()
+     3) **不在 play Promise resolve 时立即 setIsPreviewPlaying(true)**
+     4) 只在 catch 里把 isPreviewPlaying 打回 false（浏览器中断 play 时兜底）
+     5) 真正显示必须等 → playing event
+  */
   const startPreview = useCallback(() => {
-    const video = videoRef.current;
+    if (!canPreview) return;
+    const video = previewVideoRef.current;
     if (!video) return;
 
-    // 先重置到 0 秒，再播放
-    try {
-      video.currentTime = 0;
-    } catch (e) {}
-
+    try { video.currentTime = 0; } catch (e) {}
     const playPromise = video.play();
+
     if (playPromise !== undefined) {
       playPromise.catch(() => {
         setIsPreviewPlaying(false);
       });
     }
-  }, []);
+  }, [canPreview]);
 
-  /* ===== 新增：停止预览 ===== */
+  /* ========== 规格 #6：stopPreview() ==========
+     顺序：先 isPreviewPlaying=false（video opacity→0 淡出，poster 仍可见）
+           → pause → currentTime=0 重置
+  */
   const stopPreview = useCallback(() => {
-    const video = videoRef.current;
+    const video = previewVideoRef.current;
     if (!video) return;
 
     setIsPreviewPlaying(false);
@@ -105,56 +121,46 @@ export default function ProjectCard({
     } catch (e) {}
   }, []);
 
-  /* ===== 修改：mouseenter 加入防抖 + 预览逻辑 ===== */
+  /* ========== mouseenter：200ms 防抖后 startPreview ========== */
   const handleMouseEnter = useCallback(() => {
-    setIsHovered(true); // 原有 hover 状态保留
+    setIsHovered(true); // 保留原有卡片 hover 视觉（上浮 / tint / play 按钮等）
+    if (!canPreview) return;
 
-    if (!hasPreview) return; // 无预览或触屏，跳过
-
-    // 清除已有定时器（防快速反复进出）
-    if (hoverTimerRef.current) {
-      clearTimeout(hoverTimerRef.current);
-    }
-    hoverTimerRef.current = setTimeout(() => {
-      startPreview();
-    }, HOVER_DELAY);
-  }, [hasPreview, startPreview]);
-
-  /* ===== 修改：mouseleave 清除定时器 + 停止预览 ===== */
-  const handleMouseLeave = useCallback(() => {
-    setIsHovered(false); // 原有
-    setIsPressed(false); // 原有
-
-    // 清除防抖定时器
     if (hoverTimerRef.current) {
       clearTimeout(hoverTimerRef.current);
       hoverTimerRef.current = null;
     }
 
-    // 停止视频预览并重置
-    if (hasPreview) {
-      stopPreview();
-    }
-  }, [hasPreview, stopPreview]);
+    hoverTimerRef.current = setTimeout(() => {
+      startPreview();
+    }, HOVER_DELAY);
+  }, [canPreview, startPreview]);
 
-  /* ===== 原有按压逻辑（保留） ===== */
-  const handleMouseDown = () => {
-    setIsPressed(true);
-  };
-
-  const handleMouseUp = () => {
+  /* ========== mouseleave：立刻清防抖、stopPreview、重置 pressed ========== */
+  const handleMouseLeave = useCallback(() => {
+    setIsHovered(false);
     setIsPressed(false);
-  };
 
-  /* ===== 新增：卸载时清理（防内存泄漏） ===== */
+    if (hoverTimerRef.current) {
+      clearTimeout(hoverTimerRef.current);
+      hoverTimerRef.current = null;
+    }
+
+    if (!canPreview) return;
+    stopPreview();
+  }, [canPreview, stopPreview]);
+
+  const handleMouseDown = () => setIsPressed(true);
+  const handleMouseUp = () => setIsPressed(false);
+
+  /* ========== 卸载清理：保证不再后台持续解码 ========== */
   useEffect(() => {
     return () => {
-      if (hoverTimerRef.current) {
-        clearTimeout(hoverTimerRef.current);
-      }
-      const video = videoRef.current;
-      if (video) {
-        video.pause();
+      if (hoverTimerRef.current) clearTimeout(hoverTimerRef.current);
+      const v = previewVideoRef.current;
+      if (v) {
+        v.pause();
+        try { v.currentTime = 0; } catch (e) {}
       }
     };
   }, []);
@@ -171,18 +177,22 @@ export default function ProjectCard({
       onMouseUp={handleMouseUp}
       onClick={handleClick}
     >
-      {/* ===== 原有媒体容器（保留全部层级） ===== */}
       <div className="project-card__media">
-        {/* ===== 修改：VideoPlaceholder 新增 preview 相关 props ===== */}
+        {/* ========== media 容器中唯一的视频/封面单元：VideoPlaceholder ==========
+            - 封面图 + 预览视频，全部在 VideoPlaceholder 内部叠加
+            - 封面永远 opacity:1；video 叠在它上面，由 isPreviewPlaying 控制淡入淡出
+            - forwardRef 拿到 <video> 元素给 startPreview / stopPreview 和事件监听器使用
+        */}
         <VideoPlaceholder
-          ref={videoRef}
+          ref={previewVideoRef}
           coverSrc={project.cover}
           className="project-card__video"
           previewVideoSrc={previewVideoSrc}
           previewAudio={previewAudio}
           isPreviewPlaying={isPreviewPlaying}
         />
-        {/* ===== 原有装饰层（全部保留） ===== */}
+
+        {/* ========== 原有装饰层（全部保留） ========== */}
         <div className="project-card__grain" aria-hidden="true" />
         <div className="project-card__vignette" aria-hidden="true" />
         <div className="project-card__tint" aria-hidden="true" />
@@ -193,7 +203,7 @@ export default function ProjectCard({
         </div>
       </div>
 
-      {/* ===== 原有 meta（全部保留） ===== */}
+      {/* ========== 原有 meta（全部保留） ========== */}
       <div className="project-card__meta">
         <span className="project-card__num">PROJECT {project.id}</span>
         <span className="project-card__year">2026</span>

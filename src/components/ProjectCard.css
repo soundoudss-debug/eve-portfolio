@@ -72,9 +72,22 @@
   aspect-ratio: 1 / 1;
 }
 
+/* ========== media 内唯一的 VideoPlaceholder 容器：铺满并在 hover 时整体放大 ========== */
 .project-card__video {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
+  transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.project-card__video.video-placeholder {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.project-card:hover .project-card__video.video-placeholder {
+  transform: scale(1.03);
 }
 
 .project-card__grain {
@@ -152,14 +165,6 @@
 .project-card--pressed .project-card__play-btn {
   transform: translate(-50%, -50%) scale(0.9);
   background: #F29DB5;
-}
-
-.project-card__video.video-placeholder {
-  transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-.project-card:hover .project-card__video.video-placeholder {
-  transform: scale(1.03);
 }
 
 .project-card__meta {

@@ -1,0 +1,153 @@
+/* ============================================================
+   WorksPinkStrip — Hero 与 WorksHeader 之间的独立粉色 editorial strip
+   · 高度：跟 nav 差不多（~56px），不再是 28vh 巨型色块
+   · 内容：只放一个居中的 résumé 按钮 + 其模态浮窗
+   · 无 script 大字 / 无 micro label（motion / SELECTED WORKS 2026 已删）
+   ============================================================ */
+
+.works-pink-strip {
+  position: relative;
+  width: 100%;
+  /* Nav 是 fixed(top:0,height:--nav-height)，首屏内容必须从 --nav-height 起才不会被 Nav 覆盖 */
+  margin-top: var(--nav-height);
+  min-height: 56px;                    /* 与 nav 同级高度 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #E99AAF;                 /* 用户指定 dusty pink */
+  overflow: hidden;
+  z-index: 5;
+}
+
+/* grain */
+.works-pink-strip__grain {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.18;
+  mix-blend-mode: multiply;
+}
+
+/* halftone */
+.works-pink-strip__halftone {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  background-image: radial-gradient(rgba(0,0,0,0.10) 1px, transparent 1.4px);
+  background-size: 4px 4px;
+  opacity: 0.48;
+  mix-blend-mode: multiply;
+}
+
+/* ---------- 居中 résumé 按钮（复刻原 hero résumé：editorial italic + underline hover） ---------- */
+.works-pink-strip__resume {
+  position: relative;
+  z-index: 3;
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-size: clamp(0.95rem, 1.5vw, 1.15rem);
+  color: #5C3240;
+  padding: 6px 18px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  letter-spacing: 0.02em;
+  transition: transform var(--transition-fast);
+}
+
+.works-pink-strip__resume-text { position: relative; z-index: 1; }
+
+.works-pink-strip__resume-underline {
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 72%;
+  height: 1px;
+  background: #5C3240;
+  opacity: 0.45;
+  transition: width var(--transition-medium), opacity var(--transition-fast);
+}
+
+.works-pink-strip__resume:hover { transform: translateY(-2px); }
+.works-pink-strip__resume:hover .works-pink-strip__resume-underline { width: 100%; opacity: 1; }
+
+/* ============================================================
+   Résumé Coming Soon Modal（从 Hero 移来，逻辑一致）
+   ============================================================ */
+.works-pink-strip__modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(26, 24, 22, 0.8);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.works-pink-strip__modal {
+  background: #1A1816;
+  padding: 60px 48px;
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+  position: relative;
+  border: 1px solid rgba(201, 145, 138, 0.2);
+}
+
+.works-pink-strip__modal-script {
+  font-size: 2rem;
+  color: var(--color-dusty-pink);
+  display: block;
+  margin-bottom: 24px;
+  animation: wpsTwinkle 2s ease-in-out infinite;
+}
+
+.works-pink-strip__modal-text {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-size: 1.1rem;
+  color: #F1ECE5;
+  line-height: 1.7;
+  margin-bottom: 32px;
+}
+
+.works-pink-strip__modal-close {
+  font-family: var(--font-condensed);
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-dusty-pink);
+  background: transparent;
+  border: 1px solid var(--color-dusty-pink);
+  padding: 10px 24px;
+  cursor: pointer;
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.works-pink-strip__modal-close:hover {
+  background: var(--color-dusty-pink);
+  color: #1A1816;
+}
+
+@keyframes wpsTwinkle {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50%      { opacity: 0.8; transform: scale(1.2); }
+}
+
+/* 响应式：mobile 仍保持 ~56px 的 nav 高度 */
+@media (max-width: 768px) {
+  .works-pink-strip { min-height: 52px; }
+  .works-pink-strip__resume { font-size: 0.92rem; padding: 4px 14px; }
+  .works-pink-strip__modal { padding: 40px 24px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .works-pink-strip__resume { transition: none; }
+  .works-pink-strip__modal-script { animation: none; }
+}

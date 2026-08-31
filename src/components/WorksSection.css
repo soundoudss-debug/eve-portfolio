@@ -1,11 +1,21 @@
+/* =====================================================================
+   WorksSection — 极简杂志感 WORKS 章节
+   （严格按用户 §11 做减法：LESS TEXT / LESS DECORATION / MORE NEGATIVE SPACE）
+
+   垂直节奏：
+     PINK STRIP（外层） →  留白  →  WORKS  →  metadata  →  留白  →  PROJECTS
+   ===================================================================== */
+
 .works {
   position: relative;
-  padding: 120px 0 160px;
+  /* 标题与首张项目卡片之间必须有明显留白（规格 §7）：加大顶部 padding */
+  padding: 160px 0 180px;
   background: #2B2929;
   overflow: hidden;
   color: #F1ECE5;
 }
 
+/* 轻量纸面质感：只留不抢戏的 grain + scanlines（不是装饰，是 paper） */
 .works__grain {
   position: absolute;
   inset: 0;
@@ -31,255 +41,54 @@
   opacity: 0.5;
 }
 
-.works__pink-panel {
-  position: absolute;
-  z-index: 0;
-  pointer-events: none;
-}
-
-.works__pink-panel--left {
-  top: 5%;
-  left: -5%;
-  width: 180px;
-  height: 60%;
-  background: #E99AAF;
-  opacity: 0.12;
-  transform: skewX(-4deg);
-  filter: blur(1px);
-}
-
-.works__pink-panel--right {
-  bottom: 10%;
-  right: -3%;
-  width: 120px;
-  height: 45%;
-  background: #F29DB5;
-  opacity: 0.1;
-  transform: skewX(3deg);
-  filter: blur(1px);
-}
-
-.works__big-script {
-  position: absolute;
-  font-family: var(--font-script);
-  font-weight: 700;
-  color: #E99AAF;
-  pointer-events: none;
-  z-index: 2;
-  line-height: 0.85;
-  -webkit-text-stroke: 1px rgba(233, 154, 175, 0.3);
-  paint-order: stroke fill;
-}
-
-.works__big-script--selected {
-  top: 8%;
-  left: 50%;
-  transform: translateX(-50%) rotate(-2deg);
-  font-size: clamp(4rem, 12vw, 10rem);
-  opacity: 0.15;
-  letter-spacing: -0.02em;
-  white-space: nowrap;
-}
-
-.works__big-script--motion {
-  bottom: 25%;
-  right: -3%;
-  font-size: clamp(5rem, 14vw, 12rem);
-  opacity: 0.08;
-  transform: rotate(5deg);
-  font-style: italic;
-  white-space: nowrap;
-}
-
-.works__micro-text {
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  font-family: var(--font-condensed);
-  font-size: 0.6rem;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  color: #E99AAF;
-  opacity: 0.4;
-  pointer-events: none;
-  z-index: 2;
-}
-
-.works__micro-text--1 {
-  top: 18%;
-  left: 6%;
-  writing-mode: vertical-rl;
-  transform: rotate(180deg);
-}
-
-.works__micro-text--2 {
-  top: 22%;
-  right: 5%;
-  text-align: right;
-  gap: 4px;
-}
-
-.works__micro-text--3 {
-  bottom: 35%;
-  left: 8%;
-  gap: 8px;
-  opacity: 0.3;
-}
-
-.works__star {
-  position: absolute;
-  color: #F29DB5;
-  pointer-events: none;
-  z-index: 2;
-  line-height: 1;
-}
-
-.works__star--1 {
-  top: 12%;
-  left: 12%;
-  font-size: 0.8rem;
-  opacity: 0.6;
-  transform: rotate(-10deg);
-}
-
-.works__star--2 {
-  top: 20%;
-  left: 25%;
-  font-size: 0.6rem;
-  opacity: 0.4;
-}
-
-.works__star--3 {
-  top: 15%;
-  right: 18%;
-  font-size: 0.7rem;
-  color: #E99AAF;
-  opacity: 0.5;
-  transform: rotate(15deg);
-}
-
-.works__star--4 {
-  top: 30%;
-  right: 10%;
-  font-size: 0.5rem;
-  opacity: 0.35;
-}
-
-.works__star--5 {
-  bottom: 40%;
-  left: 20%;
-  font-size: 0.6rem;
-  opacity: 0.4;
-  transform: rotate(-20deg);
-}
-
-.works__star--6 {
-  bottom: 30%;
-  right: 25%;
-  font-size: 0.7rem;
-  color: #F5C5D0;
-  opacity: 0.45;
-}
-
-.works__hand-line {
-  position: absolute;
-  pointer-events: none;
-  z-index: 2;
-  opacity: 0.5;
-}
-
-.works__hand-line--1 {
-  top: 35%;
-  left: 0;
-  width: 55%;
-  height: 120px;
-}
-
-.works__hand-line--1 svg {
-  width: 100%;
-  height: 100%;
-}
-
-.works__hand-line--2 {
-  bottom: 20%;
-  right: 0;
-  width: 40%;
-  height: 80px;
-  opacity: 0.3;
-}
-
-.works__hand-line--2 svg {
-  width: 100%;
-  height: 100%;
-}
+/* ============================================================
+   WORKS HEADER — 极简三层字体角色
+   1) WORKS             editorial font · 大字（第一视觉）
+   2) 01 — 06           micro meta · 右上角 condensed
+   3) subtitle line     small condensed · 大字下方
+   ============================================================ */
 
 .works__header {
   position: relative;
   z-index: 3;
   text-align: center;
-  margin-bottom: 60px;
+  /* 标题与 role selector / 首张 project 间大量留白（规格 §7） */
+  margin-bottom: 120px;
   padding: 0 40px;
 }
 
 .works__title-wrap {
   position: relative;
   display: inline-block;
+  text-align: center;
+  max-width: 100%;
 }
 
-.works__section-num {
-  display: block;
-  font-family: var(--font-condensed);
-  font-size: 0.65rem;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: #E99AAF;
-  opacity: 0.6;
-  margin-bottom: 16px;
-}
-
-.works__title-script {
-  display: block;
-  font-family: var(--font-script);
-  font-size: clamp(2.5rem, 6vw, 4.5rem);
-  font-weight: 600;
-  color: #E99AAF;
-  line-height: 0.9;
-  transform: rotate(-2deg);
-  margin-bottom: -8px;
-  position: relative;
-  z-index: 1;
-}
-
+/* 第一视觉主字：WORKS */
 .works__title-editorial {
   font-family: var(--font-editorial);
   font-style: italic;
   font-weight: 500;
-  font-size: clamp(3rem, 8vw, 6rem);
+  font-size: clamp(4rem, 10vw, 7.5rem);
   color: #F1ECE5;
-  letter-spacing: -0.02em;
-  line-height: 0.9;
+  letter-spacing: -0.03em;
+  line-height: 0.88;
+  margin: 0;
   position: relative;
   z-index: 2;
-  margin: 0;
 }
 
-.works__title-sub {
-  display: block;
-  font-family: var(--font-condensed);
-  font-size: 0.7rem;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  color: rgba(241, 236, 229, 0.5);
-  margin-top: 20px;
-}
+/* ============================================================
+   ROLE SELECTOR（保留原有按钮样式，但与标题拉开更多留白）
+   ============================================================ */
 
 .works__role-selector {
   position: relative;
   z-index: 3;
   display: flex;
   justify-content: center;
-  margin-bottom: 80px;
+  /* 规格 §7：role 与 projects 间也要明显留白 */
+  margin-bottom: 120px;
   padding: 0 40px;
 }
 
@@ -288,32 +97,27 @@
   align-items: center;
   gap: 0;
   padding: 2px;
-  border: 1px solid rgba(233, 154, 175, 0.3);
+  border: 1px solid rgba(233, 154, 175, 0.25);
   border-radius: 50px;
-  background: rgba(43, 41, 41, 0.6);
-  position: relative;
-  backdrop-filter: blur(10px);
+  background: rgba(43, 41, 41, 0.5);
+  backdrop-filter: blur(8px);
 }
 
 .works__role-btn {
   font-family: var(--font-condensed);
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  padding: 8px 20px;
+  padding: 10px 22px;
   border: none;
   background: transparent;
-  color: rgba(241, 236, 229, 0.6);
+  color: rgba(241, 236, 229, 0.55);
   cursor: pointer;
   border-radius: 50px;
   transition: all 0.3s ease;
-  position: relative;
-  z-index: 1;
 }
 
-.works__role-btn:hover {
-  color: #E99AAF;
-}
+.works__role-btn:hover { color: #E99AAF; }
 
 .works__role-btn--active {
   background: #E99AAF;
@@ -321,9 +125,11 @@
   font-weight: 600;
 }
 
-.works__role-btn--active:hover {
-  color: #2B2929;
-}
+.works__role-btn--active:hover { color: #2B2929; }
+
+/* ============================================================
+   PROJECTS COLLAGE（保留不规则尺寸/横纵混排 — 规格 §8）
+   ============================================================ */
 
 .works__layout {
   position: relative;
@@ -331,74 +137,80 @@
   padding: 0 40px;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  gap: 40px 30px;
-  max-width: 1400px;
+  gap: 60px 36px;   /* 拉大卡片间距，避免拥挤 */
+  max-width: 1440px;
   margin: 0 auto;
 }
+
+/* ============================================================
+   FOOTER（仅一行 small editorial meta + 一个 ★）
+   ============================================================ */
 
 .works__footer {
   position: relative;
   z-index: 3;
   text-align: center;
-  margin-top: 100px;
+  margin-top: 140px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
 }
 
+/* footer 文案不再是 script（script 字体只在外层粉色块出现一次 —— 规格 §5） */
 .works__footer-text {
-  font-family: var(--font-script);
-  font-size: 1.3rem;
-  color: rgba(233, 154, 175, 0.6);
-  font-style: italic;
+  font-family: var(--font-condensed);
+  font-size: 0.64rem;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: rgba(241, 236, 229, 0.38);
 }
 
 .works__footer-star {
   color: #E99AAF;
   font-size: 0.7rem;
-  opacity: 0.5;
+  opacity: 0.55;
   animation: twinkle 2s ease-in-out infinite;
 }
 
 @keyframes twinkle {
   0%, 100% { opacity: 0.3; transform: scale(1); }
-  50% { opacity: 0.7; transform: scale(1.2); }
+  50%      { opacity: 0.7; transform: scale(1.2); }
 }
 
+/* ============================================================
+   响应式
+   ============================================================ */
+
 @media (max-width: 1024px) {
-  .works {
-    padding: 100px 0 120px;
-  }
+  .works { padding: 130px 0 140px; }
+
+  .works__header { margin-bottom: 90px; padding: 0 24px; }
+
+  .works__role-selector { margin-bottom: 90px; padding: 0 24px; }
 
   .works__layout {
     grid-template-columns: repeat(6, 1fr);
-    gap: 50px 24px;
+    gap: 56px 24px;
     padding: 0 24px;
+    max-width: 100%;
   }
 
-  .works__big-script--motion {
-    display: none;
-  }
-
-  .works__micro-text {
-    display: none;
-  }
+  .works__footer { margin-top: 110px; }
 }
 
 @media (max-width: 768px) {
-  .works {
-    padding: 80px 0 100px;
-  }
+  .works { padding: 100px 0 120px; }
 
   .works__header {
     padding: 0 20px;
-    margin-bottom: 40px;
+    margin-bottom: 64px;
+    text-align: center;
   }
 
   .works__role-selector {
-    padding: 0 20px;
-    margin-bottom: 60px;
+    padding: 0 16px;
+    margin-bottom: 72px;
   }
 
   .works__role-btn {
@@ -409,22 +221,13 @@
 
   .works__layout {
     grid-template-columns: 1fr;
-    gap: 60px;
+    gap: 56px;
     padding: 0 20px;
   }
 
-  .works__footer {
-    margin-top: 80px;
-  }
-
-  .works__pink-panel--left,
-  .works__pink-panel--right {
-    opacity: 0.08;
-  }
+  .works__footer { margin-top: 96px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .works__footer-star {
-    animation: none;
-  }
+  .works__footer-star { animation: none; }
 }

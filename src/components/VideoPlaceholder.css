@@ -26,6 +26,7 @@
   display: none;
 }
 
+/* ========== Poster cover — 永远可见（不随 isPreviewPlaying 变化） ========== */
 .video-placeholder__cover {
   position: absolute;
   inset: 0;
@@ -35,13 +36,9 @@
   display: block;
   opacity: 1;
   z-index: 0;
-  transition: opacity 0.2s ease;
 }
 
-.video-placeholder--preview-playing .video-placeholder__cover {
-  opacity: 0;
-}
-
+/* ========== 预览视频层：绝对定位叠加在 poster 上方，默认透明 ========== */
 .video-placeholder__preview {
   position: absolute;
   inset: 0;
@@ -57,29 +54,6 @@
 
 .video-placeholder__preview--visible {
   opacity: 1;
-}
-
-.video-placeholder__video {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  z-index: 1;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.video-placeholder__video--visible {
-  opacity: 1;
-}
-
-.video-placeholder__placeholder-bg {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(201, 145, 138, 0.1), rgba(26, 24, 22, 0.05));
-  z-index: 0;
 }
 
 .video-placeholder__inner {

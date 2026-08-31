@@ -117,45 +117,6 @@
   border-radius: 2px;
 }
 
-.contact__resume {
-  position: relative;
-  font-family: var(--font-editorial);
-  font-style: italic;
-  font-size: 1.1rem;
-  color: var(--color-dusty-pink);
-  padding: 12px 32px;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  transition: transform var(--transition-fast);
-}
-
-.contact__resume-text {
-  position: relative;
-  z-index: 1;
-}
-
-.contact__resume-underline {
-  position: absolute;
-  bottom: 8px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 80%;
-  height: 1px;
-  background: var(--color-dusty-pink);
-  opacity: 0.5;
-  transition: width var(--transition-medium), opacity var(--transition-fast);
-}
-
-.contact__resume:hover {
-  transform: translateY(-2px);
-}
-
-.contact__resume:hover .contact__resume-underline {
-  width: 100%;
-  opacity: 1;
-}
-
 .contact__decor {
   position: absolute;
   color: var(--color-dusty-pink);
@@ -205,63 +166,6 @@
 @keyframes pulseContact {
   0%, 100% { transform: scale(1); opacity: 0.3; }
   50% { transform: scale(1.1); opacity: 0.5; }
-}
-
-.contact__modal-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(26, 24, 22, 0.8);
-  backdrop-filter: blur(4px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  padding: 20px;
-}
-
-.contact__modal {
-  background: var(--bg-primary);
-  padding: 60px 48px;
-  max-width: 400px;
-  width: 100%;
-  text-align: center;
-  position: relative;
-  border: 1px solid rgba(201, 145, 138, 0.2);
-}
-
-.contact__modal-script {
-  font-size: 2rem;
-  color: var(--color-dusty-pink);
-  display: block;
-  margin-bottom: 24px;
-  animation: twinkle 2s ease-in-out infinite;
-}
-
-.contact__modal-text {
-  font-family: var(--font-editorial);
-  font-style: italic;
-  font-size: 1.1rem;
-  color: var(--text-secondary);
-  line-height: 1.7;
-  margin-bottom: 32px;
-}
-
-.contact__modal-close {
-  font-family: var(--font-condensed);
-  font-size: 0.7rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--color-dusty-pink);
-  background: transparent;
-  border: 1px solid var(--color-dusty-pink);
-  padding: 10px 24px;
-  cursor: pointer;
-  transition: background var(--transition-fast), color var(--transition-fast);
-}
-
-.contact__modal-close:hover {
-  background: var(--color-dusty-pink);
-  color: var(--bg-primary);
 }
 
 @media (max-width: 768px) {
