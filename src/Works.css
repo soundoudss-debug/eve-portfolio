@@ -1,0 +1,450 @@
+/* =====================================================================
+   WORKS — 实验性时尚杂志数字版
+   配色：CHARCOAL #2B2929 · DUSTY PINK #E99AAF · WARM PAPER #F1ECE5
+   结构：粉色 editorial 色块 → 炭灰 WORKS 标题 → 不对称作品拼贴
+   视频层：poster z:1 永远在底 / video z:2 仅 opacity 切换；装饰不遮挡 video
+   ===================================================================== */
+
+.works-page {
+  width: 100%;
+  background: var(--paper);
+}
+
+/* ============================================================
+   粉色 EDITORIAL 色块 —— 独立视觉板块
+   ============================================================ */
+.pink-plate {
+  position: relative;
+  width: 100%;
+  min-height: 78vh;
+  background: var(--dusty-pink);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pink-plate__grain {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='pn'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23pn)'/%3E%3C/svg%3E");
+  opacity: 0.22;
+  mix-blend-mode: multiply;
+}
+
+.pink-plate__halftone {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background-image: radial-gradient(rgba(43, 41, 41, 0.12) 1px, transparent 1.5px);
+  background-size: 5px 5px;
+  opacity: 0.5;
+  mix-blend-mode: multiply;
+}
+
+.pink-plate__center {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 巨型手写 script —— 仅作视觉图形 */
+.pink-plate__script {
+  font-family: var(--font-script);
+  font-weight: 700;
+  font-size: clamp(9rem, 30vw, 24rem);
+  line-height: 0.8;
+  margin: 0;
+  color: var(--charcoal);
+  transform: rotate(-5deg);
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+
+/* 手绘环形笔触，轻绕在 script 外侧 */
+.pink-plate__loop {
+  position: absolute;
+  width: 118%;
+  height: 170%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-6deg);
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.85;
+}
+
+/* 四角极小 condensed metadata */
+.pink-plate__meta {
+  position: absolute;
+  z-index: 2;
+  font-family: var(--font-condensed);
+  font-size: 0.78rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--deep-rose);
+}
+.pink-plate__meta--tl {
+  top: 34px;
+  left: 40px;
+}
+.pink-plate__meta--tr {
+  top: 34px;
+  right: 40px;
+}
+.pink-plate__meta--bl {
+  bottom: 34px;
+  left: 40px;
+}
+.pink-plate__meta--br {
+  bottom: 34px;
+  right: 40px;
+}
+
+/* ============================================================
+   炭灰 WORKS 区
+   ============================================================ */
+.works {
+  position: relative;
+  background: var(--charcoal);
+  color: var(--paper);
+  padding: 150px 0 170px;
+  overflow: hidden;
+}
+
+.works__grain {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='wn'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23wn)'/%3E%3C/svg%3E");
+  opacity: 0.1;
+  mix-blend-mode: overlay;
+}
+
+/* —— WORKS 标题 —— */
+.works__header {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 0 40px;
+  margin-bottom: 130px;
+}
+
+.works__kicker {
+  font-family: var(--font-condensed);
+  font-size: 0.8rem;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: var(--dusty-pink);
+  margin: 0 0 22px;
+}
+
+.works__title {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(4.5rem, 11vw, 8.5rem);
+  line-height: 0.86;
+  letter-spacing: -0.03em;
+  color: var(--paper);
+  margin: 0;
+}
+
+.works__underline {
+  width: clamp(160px, 22vw, 260px);
+  height: 22px;
+  margin: 14px auto 0;
+  display: block;
+}
+
+.works__sub {
+  font-family: var(--font-condensed);
+  font-size: 0.72rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--paper-faint);
+  margin: 20px 0 0;
+}
+
+/* ============================================================
+   作品拼贴 —— 12 栏不对称，横竖混排
+   ============================================================ */
+.works__grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 70px 40px;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+
+.work {
+  position: relative;
+}
+
+/* —— 四件作品的编辑式占位（大小 / 横竖 / 上下错位） —— */
+.work--feature {
+  grid-column: span 7;
+}
+.work--feature .work__media {
+  aspect-ratio: 16 / 10;
+}
+
+.work--portrait-a {
+  grid-column: span 5;
+  margin-top: 110px;
+}
+.work--portrait-a .work__media {
+  aspect-ratio: 4 / 5;
+}
+
+.work--portrait-b {
+  grid-column: span 5;
+  margin-top: -30px;
+}
+.work--portrait-b .work__media {
+  aspect-ratio: 3 / 4;
+}
+
+.work--wide {
+  grid-column: span 7;
+  margin-top: 60px;
+}
+.work--wide .work__media {
+  aspect-ratio: 21 / 9;
+}
+
+.work__media {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background: var(--dark-gray);
+}
+
+/* poster：底层 fallback，常驻 DOM，opacity 永远为 1 */
+.work__poster {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  z-index: 1;
+  opacity: 1;
+}
+
+/* video：上层，常驻 DOM，仅通过 opacity 控制 */
+.work__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  z-index: 2;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  background: #1a1816;
+}
+
+/* 真正 playing 后：video 淡入覆盖 poster */
+.work.is-playing .work__video {
+  opacity: 1;
+}
+
+/* —— 极小 editorial metadata —— */
+.work__meta {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin-top: 16px;
+  font-family: var(--font-condensed);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--paper-dim);
+  flex-wrap: wrap;
+}
+
+.work__num {
+  color: var(--dusty-pink);
+  font-size: 0.74rem;
+  opacity: 0.85;
+}
+
+.work__name {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-size: 1.35rem;
+  letter-spacing: 0.01em;
+  text-transform: none;
+  color: var(--paper);
+  line-height: 1;
+}
+
+.work__detail {
+  font-size: 0.74rem;
+  color: var(--paper-faint);
+  margin-left: auto;
+}
+
+.work.is-hovered .work__meta {
+  color: rgba(241, 236, 229, 0.85);
+}
+
+/* —— 页脚极小 meta —— */
+.works__foot {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-top: 150px;
+}
+
+.works__foot-text {
+  font-family: var(--font-condensed);
+  font-size: 0.68rem;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  color: var(--paper-faint);
+}
+
+.works__foot-star {
+  color: var(--dusty-pink);
+  font-size: 0.8rem;
+  opacity: 0.6;
+  animation: worksTwinkle 2.4s ease-in-out infinite;
+}
+
+@keyframes worksTwinkle {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.75;
+    transform: scale(1.25);
+  }
+}
+
+/* ============================================================
+   响应式
+   ============================================================ */
+@media (max-width: 1024px) {
+  .pink-plate {
+    min-height: 62vh;
+  }
+
+  .works {
+    padding: 120px 0 130px;
+  }
+
+  .works__header {
+    margin-bottom: 96px;
+    padding: 0 28px;
+  }
+
+  .works__grid {
+    grid-template-columns: repeat(6, 1fr);
+    gap: 60px 28px;
+    padding: 0 28px;
+  }
+
+  .work--feature,
+  .work--wide {
+    grid-column: span 6;
+  }
+  .work--portrait-a,
+  .work--portrait-b {
+    grid-column: span 3;
+    margin-top: 0;
+  }
+  .work--portrait-a .work__media,
+  .work--portrait-b .work__media {
+    aspect-ratio: 3 / 4;
+  }
+  .work--wide .work__media {
+    aspect-ratio: 16 / 9;
+  }
+}
+
+@media (max-width: 720px) {
+  .pink-plate {
+    min-height: 52vh;
+  }
+
+  .pink-plate__script {
+    font-size: clamp(7rem, 42vw, 12rem);
+  }
+
+  .pink-plate__meta {
+    font-size: 0.66rem;
+    letter-spacing: 0.24em;
+  }
+  .pink-plate__meta--tl,
+  .pink-plate__meta--tr {
+    top: 22px;
+  }
+  .pink-plate__meta--bl,
+  .pink-plate__meta--br {
+    bottom: 22px;
+  }
+  .pink-plate__meta--tr,
+  .pink-plate__meta--br {
+    right: 22px;
+  }
+  .pink-plate__meta--tl,
+  .pink-plate__meta--bl {
+    left: 22px;
+  }
+
+  .works {
+    padding: 96px 0 100px;
+  }
+
+  .works__header {
+    margin-bottom: 68px;
+    padding: 0 20px;
+  }
+
+  .works__grid {
+    grid-template-columns: 1fr;
+    gap: 56px;
+    padding: 0 20px;
+  }
+
+  /* 移动端全部统一为横图，竖图不再强制竖比例；静态 poster，不强制 autoplay */
+  .work--feature,
+  .work--portrait-a,
+  .work--portrait-b,
+  .work--wide {
+    grid-column: span 1;
+    margin-top: 0;
+  }
+  .work__media,
+  .work--feature .work__media,
+  .work--portrait-a .work__media,
+  .work--portrait-b .work__media,
+  .work--wide .work__media {
+    aspect-ratio: 16 / 10;
+  }
+
+  .work__name {
+    font-size: 1.2rem;
+  }
+
+  .work__detail {
+    margin-left: 0;
+    width: 100%;
+  }
+}

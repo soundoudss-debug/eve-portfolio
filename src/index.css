@@ -1,8 +1,30 @@
 :root {
-  font-family: system-ui, "Segoe UI", Roboto, sans-serif;
+  /* ---- 用户指定配色 ---- */
+  --charcoal: #2b2929;
+  --dark-gray: #444143;
+  --dusty-pink: #e99aaf;
+  --bubblegum: #f29db5;
+  --pale-pink: #f5c5d0;
+  --paper: #f1ece5;
+  --deep-rose: #5c3240;
+
+  /* 文字层级 */
+  --ink: var(--charcoal);
+  --paper-dim: rgba(241, 236, 229, 0.55);
+  --paper-faint: rgba(241, 236, 229, 0.38);
+
+  /* ---- 三类字体角色 ---- */
+  --font-editorial: "Playfair Display", Georgia, "Times New Roman", serif;
+  --font-condensed: "Bebas Neue", Impact, "Arial Narrow", sans-serif;
+  --font-script: "Dancing Script", "Brush Script MT", cursive;
+  --font-body: "Inter", system-ui, -apple-system, sans-serif;
+
+  --ease-editorial: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+  font-family: var(--font-body);
+  color: var(--ink);
+  background: var(--paper);
   color-scheme: light;
-  color: #222;
-  background: #f2eee8;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -13,11 +35,29 @@
   box-sizing: border-box;
 }
 
+html,
 body {
   margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--paper);
 }
 
 #root {
   width: 100%;
   min-height: 100svh;
+}
+
+::selection {
+  background: var(--dusty-pink);
+  color: var(--charcoal);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition-duration: 0.001ms !important;
+    animation-duration: 0.001ms !important;
+  }
 }

@@ -1,7 +1,7 @@
-import VideoPreviewPage from "./VideoPreviewPage.jsx";
+import Works from "./Works.jsx";
 
 function App() {
-  return <VideoPreviewPage />;
+  return <Works />;
 }
 
 export default App;
