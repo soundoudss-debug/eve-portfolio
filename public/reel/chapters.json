@@ -1,0 +1,11 @@
+{
+  "video": "/videos/reel.mp4",
+  "note": "章节节点数据：调整节点时间只需改 t（秒）和标题。之后接入后端时，ReelSection.jsx 里的 CHAPTERS_URL 换成接口地址返回同样结构即可。",
+  "chapters": [
+    { "t": 0.0,  "en": "Intro",        "zh": "开场" },
+    { "t": 8.5,  "en": "Fast Cuts",    "zh": "快剪" },
+    { "t": 18.0, "en": "Transitions",  "zh": "转场" },
+    { "t": 27.5, "en": "Color",        "zh": "调色" },
+    { "t": 38.0, "en": "Finale",       "zh": "收尾" }
+  ]
+}

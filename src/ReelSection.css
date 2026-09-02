@@ -1,0 +1,320 @@
+/* =====================================================================
+   REEL —— 底部剪辑集锦播放器
+   暖纸底 + 深色播放器 + 粉色章节节点；与全站编辑风格一致
+   ===================================================================== */
+
+.reel {
+  position: relative;
+  background: var(--paper);
+  padding: 130px 0 150px;
+}
+
+.reel__inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+/* —— 标题 —— */
+.reel__header {
+  margin-bottom: 40px;
+}
+
+.reel__kicker {
+  font-family: var(--font-condensed);
+  font-size: 0.8rem;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: var(--deep-rose);
+  margin: 0 0 14px;
+}
+
+.reel__title {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(3rem, 7vw, 5.2rem);
+  line-height: 0.9;
+  color: var(--charcoal);
+  margin: 0;
+}
+
+/* —— 播放器 —— */
+.reel__frame {
+  position: relative;
+  background: #141212;
+  overflow: hidden;
+}
+
+.reel__frame:fullscreen {
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.reel__frame:fullscreen .reel__video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.reel__frame:fullscreen .reel__controls {
+  position: absolute;
+}
+
+.reel__video {
+  display: block;
+  width: 100%;
+  background: #0e0d0c;
+  cursor: pointer;
+}
+
+.reel__controls {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 34px 18px 10px;
+  background: rgba(18, 16, 16, 0.78);
+}
+
+/* —— 进度条 —— */
+.reel-bar {
+  position: relative;
+  height: 22px;
+  cursor: pointer;
+  touch-action: none;
+}
+
+.reel-bar__track {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 4px;
+  transform: translateY(-50%);
+  background: rgba(241, 236, 229, 0.25);
+}
+
+.reel-bar__played {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  height: 4px;
+  transform: translateY(-50%);
+  background: var(--dusty-pink);
+  pointer-events: none;
+}
+
+/* 章节节点 */
+.reel-bar__node {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.reel-bar__dot {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: #141212;
+  border: 2px solid var(--paper);
+  transition: transform 0.18s var(--ease-editorial),
+    background 0.18s ease, box-shadow 0.18s ease;
+}
+
+.reel-bar__node:hover .reel-bar__dot {
+  transform: translate(-50%, -50%) scale(1.25);
+}
+
+.reel-bar__node.is-past .reel-bar__dot {
+  background: var(--dusty-pink);
+  border-color: var(--paper);
+}
+
+.reel-bar__node.is-active .reel-bar__dot {
+  background: var(--dusty-pink);
+  border-color: var(--paper);
+  transform: translate(-50%, -50%) scale(1.4);
+  box-shadow: 0 0 0 5px rgba(233, 154, 175, 0.3);
+}
+
+/* 节点悬浮提示 */
+.reel-bar__tip {
+  position: absolute;
+  bottom: 30px;
+  transform: translateX(-50%);
+  background: var(--charcoal);
+  color: var(--paper);
+  border: 1px solid var(--dusty-pink);
+  font-family: var(--font-condensed);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  padding: 5px 10px;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+/* —— 控制行 —— */
+.reel-controls__row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 6px;
+  color: var(--paper);
+}
+
+.reel-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  padding: 4px;
+  color: var(--paper);
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+.reel-btn:hover {
+  color: var(--dusty-pink);
+}
+
+.reel-time {
+  font-family: var(--font-condensed);
+  font-size: 0.8rem;
+  letter-spacing: 0.16em;
+  color: rgba(241, 236, 229, 0.85);
+}
+
+.reel-time__sep {
+  color: rgba(241, 236, 229, 0.4);
+}
+
+.reel-hint {
+  margin-left: auto;
+  font-family: var(--font-condensed);
+  font-size: 0.68rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(241, 236, 229, 0.42);
+}
+
+.reel-controls__right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.reel-volume {
+  width: 72px;
+  accent-color: var(--dusty-pink);
+  cursor: pointer;
+}
+
+/* —— 章节列表 —— */
+.reel-chapters {
+  margin-top: 28px;
+}
+
+.reel-chapters__label {
+  font-family: var(--font-condensed);
+  font-size: 0.72rem;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: rgba(43, 41, 41, 0.5);
+  margin: 0 0 14px;
+}
+
+.reel-chapters__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.reel-chip {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 10px;
+  border: 1px solid rgba(43, 41, 41, 0.25);
+  background: none;
+  padding: 9px 16px;
+  cursor: pointer;
+  font-family: var(--font-condensed);
+  color: var(--dark-gray);
+  transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+.reel-chip:hover {
+  border-color: var(--dusty-pink);
+  color: var(--deep-rose);
+}
+
+.reel-chip__time {
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  color: rgba(43, 41, 41, 0.45);
+}
+
+.reel-chip__title {
+  font-size: 0.84rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.reel-chip.is-past {
+  border-color: rgba(233, 154, 175, 0.55);
+}
+
+.reel-chip.is-active {
+  background: var(--dusty-pink);
+  border-color: var(--dusty-pink);
+  color: var(--charcoal);
+}
+.reel-chip.is-active .reel-chip__time {
+  color: rgba(43, 41, 41, 0.65);
+}
+
+/* —— 响应式 —— */
+@media (max-width: 720px) {
+  .reel {
+    padding: 90px 0 100px;
+  }
+  .reel__inner {
+    padding: 0 20px;
+  }
+  .reel__header {
+    margin-bottom: 28px;
+  }
+
+  .reel__controls {
+    padding: 28px 12px 8px;
+  }
+  .reel-hint {
+    display: none;
+  }
+  .reel-volume {
+    width: 52px;
+  }
+  .reel-time {
+    font-size: 0.72rem;
+  }
+
+  .reel-chapters__list {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 8px;
+    -webkit-overflow-scrolling: touch;
+  }
+  .reel-chip {
+    flex: 0 0 auto;
+  }
+}

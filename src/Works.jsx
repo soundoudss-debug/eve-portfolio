@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import "./Works.css";
+import ReelSection from "./ReelSection.jsx";
 
 /* =====================================================================
    作品数据集中定义：poster / src 只在这里维护一次
@@ -361,6 +362,9 @@ export default function Works() {
           </span>
         </footer>
       </section>
+
+      {/* ————— 底部剪辑集锦播放器（章节节点进度条） ————— */}
+      <ReelSection lang={lang} />
 
       {/* ————— 简历弹窗：PDF 占位区（上传 resume.pdf 后替换） ————— */}
       {modal === "resume" && (
