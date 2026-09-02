@@ -3,14 +3,14 @@ import "./Works.css";
 
 /* =====================================================================
    作品数据集中定义：poster / src 只在这里维护一次
-   视频交互逻辑与独立 Demo（VideoPreviewPage）完全一致，未重写、未复杂化
+   category 双语；视频交互逻辑与独立 Demo 完全一致，未重写
    ===================================================================== */
 const projects = [
   {
     id: 1,
     num: "01",
     name: "Bloom",
-    category: "Fashion Film",
+    category: { en: "Fashion Film", zh: "时尚影像" },
     year: "2026",
     layout: "feature",
     poster:
@@ -25,7 +25,7 @@ const projects = [
     id: 2,
     num: "02",
     name: "Drift",
-    category: "Motion Design",
+    category: { en: "Motion Design", zh: "动态设计" },
     year: "2025",
     layout: "portrait-a",
     poster:
@@ -40,7 +40,7 @@ const projects = [
     id: 3,
     num: "03",
     name: "Ember",
-    category: "Game PV / VFX",
+    category: { en: "Game PV / VFX", zh: "游戏PV / 特效" },
     year: "2025",
     layout: "portrait-b",
     poster:
@@ -55,7 +55,7 @@ const projects = [
     id: 4,
     num: "04",
     name: "Pulse",
-    category: "Editing / Visual",
+    category: { en: "Editing / Visual", zh: "剪辑 / 视觉" },
     year: "2024",
     layout: "wide",
     poster:
@@ -68,7 +68,122 @@ const projects = [
   },
 ];
 
+/* ==================== 中英文案 ==================== */
+const t = {
+  en: {
+    navWork: "Work",
+    navContact: "Contact",
+    resume: "Resume",
+    kicker: "Selected Works — 2026",
+    sub: "Motion / Video / Visual",
+    footer: "More works coming soon",
+    close: "Close",
+    resumeTitle: "Résumé",
+    resumeRole: "Video Editor & Motion Designer",
+    resumeFocus: "Fashion film · Motion graphics · Post-production",
+    expertiseLabel: "Expertise",
+    experienceLabel: "Experience",
+    resumeContact: "Contact",
+    contactTitle: "Contact",
+    contactHead: "Let’s make something",
+    contactLine:
+      "Open for collaborations, freelance & commissions.",
+    contactLocation: "Shanghai — Remote worldwide",
+  },
+  zh: {
+    navWork: "作品",
+    navContact: "联系",
+    resume: "简历",
+    kicker: "精选作品 — 2026",
+    sub: "动态 / 影像 / 视觉",
+    footer: "更多作品 即将更新",
+    close: "关闭",
+    resumeTitle: "简历",
+    resumeRole: "视频剪辑 · 动态设计师",
+    resumeFocus: "时尚影像 · 动态图形 · 后期制作",
+    expertiseLabel: "擅长领域",
+    experienceLabel: "经历",
+    resumeContact: "联系方式",
+    contactTitle: "联系",
+    contactHead: "一起创作吧",
+    contactLine: "欢迎洽谈合作 / 自由职业 / 委托项目。",
+    contactLocation: "上海 — 可远程协作",
+  },
+};
+
+/* 简历内容：占位信息，可直接替换为真实经历 */
+const CONTACT_EMAIL = "hello@eve.studio"; // TODO: 替换为真实邮箱
+const resumeData = {
+  en: {
+    expertise: [
+      "Video Editing",
+      "Motion Design",
+      "Color Grading",
+      "VFX & Compositing",
+      "Sound Design",
+    ],
+    experience: [
+      {
+        time: "2024 — Now",
+        title: "Freelance Motion Designer",
+        org: "MCN · Brand campaigns",
+        desc: "Short-form edits, title sequences and campaign promos.",
+      },
+      {
+        time: "2023 — 2024",
+        title: "Video Editor",
+        org: "Game PV · Social content",
+        desc: "Game trailers and social-first video production.",
+      },
+      {
+        time: "2022 — 2023",
+        title: "Junior Editor",
+        org: "Production Studio",
+        desc: "Footage assembly, sync and finishing.",
+      },
+    ],
+  },
+  zh: {
+    expertise: ["视频剪辑", "动态设计", "调色", "特效合成", "声音设计"],
+    experience: [
+      {
+        time: "2024 — 至今",
+        title: "自由职业动态设计师",
+        org: "MCN · 品牌广告",
+        desc: "短视频剪辑、片头设计与品牌宣传物料。",
+      },
+      {
+        time: "2023 — 2024",
+        title: "视频剪辑师",
+        org: "游戏PV · 社交媒体内容",
+        desc: "游戏预告片与社媒优先的视频制作。",
+      },
+      {
+        time: "2022 — 2023",
+        title: "剪辑助理",
+        org: "制作工作室",
+        desc: "素材整理、对位与成片收尾。",
+      },
+    ],
+  },
+};
+
 export default function Works() {
+  /* ==================== 语言 / 弹窗 ==================== */
+  const [lang, setLang] = useState("en");
+  const [modal, setModal] = useState(null); // 'resume' | 'contact' | null
+  const tr = t[lang];
+  const rd = resumeData[lang];
+
+  useEffect(() => {
+    if (!modal) return undefined;
+    const onKey = (e) => {
+      if (e.key === "Escape") setModal(null);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [modal]);
+
   /* ==================== 视频引擎（与独立 Demo 逐字一致，不改动） ==================== */
   const [hoveredId, setHoveredId] = useState(null);
   const [playingId, setPlayingId] = useState(null);
@@ -147,70 +262,70 @@ export default function Works() {
     };
   }, []);
 
-  /* ==================== 页面结构：粉色编辑色块 → WORKS 标题 → 作品拼贴 ==================== */
   return (
-    <main className="works-page">
-      {/* ————— 粉色 EDITORIAL 色块（开场，独立视觉板块，非普通 banner） ————— */}
-      <section className="pink-plate" aria-label="Editorial color plate">
-        <div className="pink-plate__grain" aria-hidden="true" />
-        <div className="pink-plate__halftone" aria-hidden="true" />
+    <main className="works-page" id="top">
+      {/* ————— NAV（暖纸底：eve 左 / Work·Contact 中 / 2026 + EN中 右） ————— */}
+      <nav className="nav" aria-label="Primary">
+        <a className="nav__logo" href="#top">
+          eve
+        </a>
 
-        <span className="pink-plate__meta pink-plate__meta--tl">
-          Issue&nbsp;Nº01
-        </span>
-        <span className="pink-plate__meta pink-plate__meta--tr">
-          Selected&nbsp;Works
-        </span>
-
-        <div className="pink-plate__center">
-          <h1 className="pink-plate__script">Eve</h1>
-          {/* 手绘环形笔触 */}
-          <svg
-            className="pink-plate__loop"
-            viewBox="0 0 320 200"
-            fill="none"
-            aria-hidden="true"
+        <div className="nav__links">
+          <a href="#works">{tr.navWork}</a>
+          <button
+            type="button"
+            className="nav__link-btn"
+            onClick={() => setModal("contact")}
           >
-            <path
-              d="M52 104 C 40 44, 148 22, 214 44 C 286 68, 300 140, 226 162 C 140 188, 58 168, 62 120"
-              stroke="#2b2929"
-              strokeWidth="3"
-              strokeLinecap="round"
-            />
-          </svg>
+            {tr.navContact}
+          </button>
         </div>
 
-        <span className="pink-plate__meta pink-plate__meta--bl">
-          2026
-        </span>
-        <span className="pink-plate__meta pink-plate__meta--br">
-          Motion&nbsp;/&nbsp;Video&nbsp;/&nbsp;Visual
-        </span>
+        <div className="nav__right">
+          <span className="nav__year">2026</span>
+          <div className="nav__lang" aria-label="Language switch">
+            <button
+              type="button"
+              className={lang === "en" ? "is-active" : ""}
+              onClick={() => setLang("en")}
+            >
+              EN
+            </button>
+            <span className="nav__lang-sep" aria-hidden="true">
+              /
+            </span>
+            <button
+              type="button"
+              className={lang === "zh" ? "is-active" : ""}
+              onClick={() => setLang("zh")}
+            >
+              中
+            </button>
+          </div>
+        </div>
+      </nav>
+
+      {/* ————— 粉色窄条：居中 RESUME / 简历（点击打开简历弹窗） ————— */}
+      <section className="resume-strip" aria-label="Resume">
+        <div className="resume-strip__halftone" aria-hidden="true" />
+        <button
+          type="button"
+          className="resume-strip__btn"
+          onClick={() => setModal("resume")}
+        >
+          <span className="resume-strip__btn-text">{tr.resume}</span>
+          <span className="resume-strip__underline" aria-hidden="true" />
+        </button>
       </section>
 
       {/* ————— 炭灰 WORKS 区 ————— */}
-      <section className="works">
+      <section className="works" id="works">
         <div className="works__grain" aria-hidden="true" />
 
-        {/* WORKS 标题：简洁三层字体角色 */}
         <header className="works__header">
-          <p className="works__kicker">Selected&nbsp;Works&nbsp;—&nbsp;2026</p>
+          <p className="works__kicker">{tr.kicker}</p>
           <h2 className="works__title">WORKS</h2>
-          {/* 手绘下划线笔触 */}
-          <svg
-            className="works__underline"
-            viewBox="0 0 240 22"
-            fill="none"
-            aria-hidden="true"
-          >
-            <path
-              d="M6 14 C 60 5, 120 18, 178 9 C 206 5, 226 9, 236 7"
-              stroke="#e99aaf"
-              strokeWidth="3"
-              strokeLinecap="round"
-            />
-          </svg>
-          <p className="works__sub">Motion&nbsp;/&nbsp;Video&nbsp;/&nbsp;Visual</p>
+          <p className="works__sub">{tr.sub}</p>
         </header>
 
         {/* 作品拼贴：不对称 12 栏，横竖混排 */}
@@ -263,7 +378,7 @@ export default function Works() {
                   <span className="work__num">{p.num}</span>
                   <span className="work__name">{p.name}</span>
                   <span className="work__detail">
-                    {p.year}&nbsp;—&nbsp;{p.category}
+                    {p.year}&nbsp;—&nbsp;{p.category[lang]}
                   </span>
                 </div>
               </article>
@@ -272,12 +387,108 @@ export default function Works() {
         </div>
 
         <footer className="works__foot">
-          <span className="works__foot-text">More works coming soon</span>
+          <span className="works__foot-text">{tr.footer}</span>
           <span className="works__foot-star" aria-hidden="true">
             ✦
           </span>
         </footer>
       </section>
+
+      {/* ————— 简历弹窗 ————— */}
+      {modal === "resume" && (
+        <div
+          className="modal-overlay"
+          onClick={() => setModal(null)}
+          role="presentation"
+        >
+          <div
+            className="modal modal--resume"
+            role="dialog"
+            aria-modal="true"
+            aria-label={tr.resumeTitle}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              type="button"
+              className="modal__close"
+              onClick={() => setModal(null)}
+            >
+              {tr.close} ✕
+            </button>
+
+            <p className="modal__kicker">{tr.resumeTitle}</p>
+            <h3 className="modal__script">eve</h3>
+            <p className="modal__role">{tr.resumeRole}</p>
+            <p className="modal__focus">{tr.resumeFocus}</p>
+
+            <div className="modal__section">
+              <h4 className="modal__label">{tr.expertiseLabel}</h4>
+              <ul className="modal__chips">
+                {rd.expertise.map((item) => (
+                  <li key={item} className="modal__chip">
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="modal__section">
+              <h4 className="modal__label">{tr.experienceLabel}</h4>
+              <ul className="modal__timeline">
+                {rd.experience.map((job) => (
+                  <li key={job.time} className="modal__job">
+                    <span className="modal__job-time">{job.time}</span>
+                    <div className="modal__job-body">
+                      <span className="modal__job-title">{job.title}</span>
+                      <span className="modal__job-org">{job.org}</span>
+                      <span className="modal__job-desc">{job.desc}</span>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="modal__section modal__section--contact">
+              <a className="modal__email" href={`mailto:${CONTACT_EMAIL}`}>
+                {CONTACT_EMAIL}
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ————— 联系弹窗 ————— */}
+      {modal === "contact" && (
+        <div
+          className="modal-overlay"
+          onClick={() => setModal(null)}
+          role="presentation"
+        >
+          <div
+            className="modal modal--contact"
+            role="dialog"
+            aria-modal="true"
+            aria-label={tr.contactTitle}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              type="button"
+              className="modal__close"
+              onClick={() => setModal(null)}
+            >
+              {tr.close} ✕
+            </button>
+
+            <p className="modal__kicker">{tr.contactTitle}</p>
+            <h3 className="modal__head-serif">{tr.contactHead}</h3>
+            <p className="modal__line">{tr.contactLine}</p>
+            <a className="modal__email modal__email--big" href={`mailto:${CONTACT_EMAIL}`}>
+              {CONTACT_EMAIL}
+            </a>
+            <p className="modal__location">{tr.contactLocation}</p>
+          </div>
+        </div>
+      )}
     </main>
   );
 }
