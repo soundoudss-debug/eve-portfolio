@@ -1,3 +1,14 @@
+/* ================================================================
+   ProjectCard.css — 独立 Demo 同款规则重建（仅改视频预览层，外观不动）
+   参考：C:\Users\eve\Desktop\简历\新建文件夹\src\VideoPreviewPage.css
+   原则 §10/§11/§12：
+     1. poster = z:1，opacity: 1（永远，绝对不因为 hover / playing 变化）
+     2. preview-video = z:2，opacity: 0，只通过 --visible（playing 状态）→ 1
+     3. 删除旧遗留：project-card__video（VideoPlaceholder 时代 wrapper class）
+     4. 所有装饰层（grain / vignette / tint / play-btn）pointer-events: none，
+        且无不透明背景，不会覆盖 video 实际播放画面
+================================================================ */
+
 .project-card {
   position: relative;
   cursor: pointer;
@@ -8,39 +19,12 @@
   transform: scale(0.98);
 }
 
-.project-card--layout-0 {
-  grid-column: span 7;
-  grid-row: span 1;
-}
-
-.project-card--layout-1 {
-  grid-column: span 5;
-  grid-row: span 1;
-  margin-top: 60px;
-}
-
-.project-card--layout-2 {
-  grid-column: span 4;
-  grid-row: span 1;
-  margin-top: -20px;
-}
-
-.project-card--layout-3 {
-  grid-column: span 8;
-  grid-row: span 1;
-}
-
-.project-card--layout-4 {
-  grid-column: span 6;
-  grid-row: span 1;
-  margin-top: 40px;
-}
-
-.project-card--layout-5 {
-  grid-column: span 6;
-  grid-row: span 1;
-  margin-top: 10px;
-}
+.project-card--layout-0 { grid-column: span 7; grid-row: span 1; }
+.project-card--layout-1 { grid-column: span 5; grid-row: span 1; margin-top: 60px; }
+.project-card--layout-2 { grid-column: span 4; grid-row: span 1; margin-top: -20px; }
+.project-card--layout-3 { grid-column: span 8; grid-row: span 1; }
+.project-card--layout-4 { grid-column: span 6; grid-row: span 1; margin-top: 40px; }
+.project-card--layout-5 { grid-column: span 6; grid-row: span 1; margin-top: 10px; }
 
 .project-card__media {
   position: relative;
@@ -48,53 +32,82 @@
   overflow: hidden;
   aspect-ratio: 16 / 10;
   background: #444143;
-  opacity: 1 !important;
-  visibility: visible !important;
+  transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-.project-card--layout-1 .project-card__media {
-  aspect-ratio: 4 / 5;
+.project-card--layout-1 .project-card__media { aspect-ratio: 4 / 5; }
+.project-card--layout-2 .project-card__media { aspect-ratio: 3 / 4; }
+.project-card--layout-3 .project-card__media { aspect-ratio: 21 / 9; }
+.project-card--layout-4 .project-card__media { aspect-ratio: 16 / 9; }
+.project-card--layout-5 .project-card__media { aspect-ratio: 1 / 1; }
+
+.project-card:hover .project-card__media,
+.project-card--hovered .project-card__media {
+  transform: scale(1.03);
 }
 
-.project-card--layout-2 .project-card__media {
-  aspect-ratio: 3 / 4;
-}
+/* ================================================================
+   §10 新建：Poster + Preview Video 两层，严格按用户给出的最终 CSS 模板
+   ================================================================ */
 
-.project-card--layout-3 .project-card__media {
-  aspect-ratio: 21 / 9;
-}
-
-.project-card--layout-4 .project-card__media {
-  aspect-ratio: 16 / 9;
-}
-
-.project-card--layout-5 .project-card__media {
-  aspect-ratio: 1 / 1;
-}
-
-/* ========== media 内唯一的 VideoPlaceholder 容器：铺满并在 hover 时整体放大 ========== */
-.project-card__video {
+.project-card__poster {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  object-fit: cover;
+  display: block;
+
+  z-index: 1;
+  opacity: 1 !important;      /* §10 poster 永远不能因为 playingId 改变；§11 删除任何会让 poster 变透明的规则 */
+  visibility: visible !important;
 }
 
-.project-card__video.video-placeholder {
+.project-card__preview-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+
+  z-index: 2;
+  opacity: 0;
+
+  transition: opacity 0.2s ease;
+
+  background: #222;
+}
+
+.project-card__preview-video--visible {
+  opacity: 1;
+}
+
+/* ================================================================
+   §11 禁止残留：绝对不能有 poster 因为 playing 消失
+   ================================================================ */
+
+/* 明确声明：任何状态下 poster 都保持可见。无例外。 */
+.project-card--hovered .project-card__poster,
+.project-card--playing .project-card__poster,
+.project-card:hover .project-card__poster {
   opacity: 1 !important;
   visibility: visible !important;
 }
 
-.project-card:hover .project-card__video.video-placeholder {
-  transform: scale(1.03);
-}
+/* ================================================================
+   装饰层（grain / vignette / tint / play-btn） — 全部保留，外观不变
+   关键改动 §12：
+     · 全部 pointer-events: none → 不会挡住 video 的 controls 交互
+     · z-index 在 video 之上（3/4/5）但都没有不透明背景
+     · grain/vignette 是半透明纹理；tint 30% 粉色；play-btn 72×72 圆形中央（pointer-events:none）
+================================================================ */
 
 .project-card__grain {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  z-index: 2;
+  z-index: 3;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
   opacity: 0.06;
   transition: opacity 0.4s ease;
@@ -108,7 +121,7 @@
   position: absolute;
   inset: 0;
   pointer-events: none;
-  z-index: 1;
+  z-index: 3;
   background: radial-gradient(
     ellipse at center,
     transparent 40%,
@@ -120,7 +133,7 @@
   position: absolute;
   inset: 0;
   pointer-events: none;
-  z-index: 3;
+  z-index: 4;
   background: rgba(233, 154, 175, 0.3);
   opacity: 0;
   transition: opacity 0.4s ease;
@@ -128,7 +141,6 @@
 
 .project-card--hovered .project-card__tint {
   opacity: 1;
-  background: rgba(233, 154, 175, 0.3);
 }
 
 .project-card__play-btn {
@@ -144,7 +156,7 @@
   align-items: center;
   justify-content: center;
   color: #2B2929;
-  z-index: 4;
+  z-index: 5;
   pointer-events: none;
   opacity: 0;
   transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -167,6 +179,10 @@
   background: #F29DB5;
 }
 
+/* ================================================================
+   Meta（不动外观）
+================================================================ */
+
 .project-card__meta {
   display: flex;
   align-items: center;
@@ -180,26 +196,16 @@
   flex-wrap: wrap;
 }
 
-.project-card__num {
-  color: #E99AAF;
-  opacity: 0.7;
-}
+.project-card__num { color: #E99AAF; opacity: 0.7; }
+.project-card__year { color: rgba(241, 236, 229, 0.4); }
+.project-card__category { color: rgba(241, 236, 229, 0.6); }
 
-.project-card__year {
-  color: rgba(241, 236, 229, 0.4);
-}
+.project-card--hovered .project-card__meta { color: rgba(241, 236, 229, 0.8); }
+.project-card--hovered .project-card__num { opacity: 1; }
 
-.project-card__category {
-  color: rgba(241, 236, 229, 0.6);
-}
-
-.project-card--hovered .project-card__meta {
-  color: rgba(241, 236, 229, 0.8);
-}
-
-.project-card--hovered .project-card__num {
-  opacity: 1;
-}
+/* ================================================================
+   响应式（不动外观）
+================================================================ */
 
 @media (max-width: 1024px) {
   .project-card--layout-0,

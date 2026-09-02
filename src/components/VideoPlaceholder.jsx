@@ -1,53 +1,39 @@
-import { forwardRef, useEffect } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import './VideoPlaceholder.css';
 
 /**
- * VideoPlaceholder — 封面图 / Coming Soon 占位 + hover 预览视频层
+ * VideoPlaceholder（已删除所有旧 hover preview 功能，只保留：Cover / Coming Soon 占位）
  *
- * Props:
- *  - label / aspectRatio / className / coverSrc       （原占位图职责，保留）
- *  - previewVideoSrc?: string   预览短视频地址；有值就渲染 <video> 预览层（常驻，只由 opacity 控制显示）
- *  - previewAudio?: boolean     预览是否出声，默认 false（静音）
- *  - isPreviewPlaying?: boolean 是否显示预览视频（由父组件 ProjectCard 通过 playing event 精确控制）
+ *   旧版本这里承担过：
+ *     · forwardRef -> previewVideoRef
+ *     · previewVideoSrc / previewAudio / isPreviewPlaying 三合一预览层
+ *     · preload="auto" + opacity isPreviewPlaying 切换
+ *   按用户 §1 / §2 / §15 要求：以上所有 preview 代码和功能已彻底删除。
  *
- * 设计（严格对应修复规格#1 #2 #3 #9）：
- *  · cover poster 永远 opacity:1（作为 video preview 的 fallback，不随 isPreviewPlaying 隐藏）
- *  · <video> 只在 previewVideoSrc 有值 + coverSrc 有值时渲染 → 加载 metadata 成本受控
- *  · <video> 渲染后常驻在 DOM，**不做 isPreviewPlaying 条件挂/卸** → 只由 opacity 控制淡入淡出
- *  · preload="auto" → hover preview 专用，减少移入等待
- *  · 只监听 'playing' 事件 → 不监听 'waiting'（避免 buffering 反复显隐造成闪烁）
+ *   现在此组件仅用于：
+ *     1) coverSrc 非空 → 显示一张静态 <img>（纯封面）
+ *     2) coverSrc 为空 → 显示 Coming Soon 占位图案（装饰 + 文案 + 占位）
+ *
+ *   hover 视频预览新实现已经搬到 ProjectCard.jsx 内的 2 层结构：
+ *     <img class="project-card__poster"> (z=1)
+ *     <video class="project-card__preview-video"> (z=2)
+ *   不再通过本组件间接传递。
  */
-const VideoPlaceholder = forwardRef(function VideoPlaceholder(
-  {
-    label,
-    aspectRatio = '16/9',
-    className = '',
-    coverSrc = null,
-    previewVideoSrc,
-    previewAudio = false,
-    isPreviewPlaying = false,
-  },
-  ref,
-) {
+export default function VideoPlaceholder({
+  label,
+  aspectRatio = '16/9',
+  className = '',
+  coverSrc = null,
+}) {
   const { t } = useLanguage();
   const displayLabel = label || t.works.comingSoon;
-
-  /* ========== 规格 #4：只监听 'playing'，不监听 'waiting' ==========
-     真正的 show 时机由父组件 ProjectCard 控制 ——
-     父组件通过 ref 拿到 <video>，监听 playing 并 setState 写入 isPreviewPlaying。
-     这里只做一层保险：若是视频内部报错，通过 ref 对应的 video 触发 error 时父组件自己处理。
-     此处不再订阅事件，避免与父组件事件重复订阅产生竞态。*/
-  useEffect(() => {
-    // 占位：预留扩展点。当前 playing/error 的订阅统一放在 ProjectCard useEffect 内处理。
-  }, []);
 
   return (
     <div
       className={`video-placeholder ${coverSrc ? 'video-placeholder--has-cover' : 'video-placeholder--is-placeholder'} ${className}`}
       style={{ aspectRatio }}
     >
-      {/* ========== Poster / 封面图：永远可见（Fallback 用） ========== */}
+      {/* 静态封面图（如果有）：纯展示，不接交互 */}
       {coverSrc && (
         <img
           src={coverSrc}
@@ -56,27 +42,7 @@ const VideoPlaceholder = forwardRef(function VideoPlaceholder(
         />
       )}
 
-      {/* ========== 预览视频层：叠加在 poster 上，默认透明
-          条件渲染 = 有 previewVideoSrc AND 有 coverSrc（只有有封面图的卡片才需要预览层）。
-          一旦渲染，**不因 isPreviewPlaying 卸载**。
-      */}
-      {previewVideoSrc && coverSrc && (
-        <video
-          ref={ref}
-          src={previewVideoSrc}
-          className={`video-placeholder__preview ${
-            isPreviewPlaying ? 'video-placeholder__preview--visible' : ''
-          }`}
-          muted={!previewAudio}
-          loop
-          playsInline
-          controlsList="nodownload"
-          preload="auto"
-          aria-hidden="true"
-        />
-      )}
-
-      {/* ========== Coming Soon 占位图案（仅当 coverSrc 为空时渲染） ========== */}
+      {/* Coming Soon 占位图案（仅当 coverSrc 为空时） */}
       {!coverSrc && (
         <div className="video-placeholder__inner">
           <span className="video-placeholder__decor-star video-placeholder__decor-star--1">✦</span>
@@ -126,6 +92,4 @@ const VideoPlaceholder = forwardRef(function VideoPlaceholder(
       )}
     </div>
   );
-});
-
-export default VideoPlaceholder;
+}

@@ -38,23 +38,14 @@
   z-index: 0;
 }
 
-/* ========== 预览视频层：绝对定位叠加在 poster 上方，默认透明 ========== */
-.video-placeholder__preview {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  z-index: 1;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.2s ease;
-}
-
-.video-placeholder__preview--visible {
-  opacity: 1;
-}
+/* ========== 旧的 preview video 相关类已按用户 §2 / §15 / §16 要求彻底删除：
+   已删除：
+     - .video-placeholder__preview
+     - .video-placeholder__preview--visible
+     - 任何 opacity 随 isPreviewPlaying 切换的规则
+   新的 preview 功能不再经过 VideoPlaceholder，而由 ProjectCard 内 2 层结构实现：
+     project-card__poster (z1) + project-card__preview-video (z2)
+   ========== */
 
 .video-placeholder__inner {
   position: absolute;

@@ -20,7 +20,7 @@ export const projects = [
     },
     role: { en: 'Video Editor', zh: '视频剪辑' },
     tools: ['Premiere Pro', 'After Effects'],
-    video: '/assets/projects/game-pv/video.mp4',
+    video: '/videos/video-01.mp4',
     cover: '/assets/projects/game-pv/cover.jpg',
     tags: { en: ['Editing', 'VFX', 'After Effects'], zh: ['剪辑', '视效', 'After Effects'] },
     about: {
@@ -49,7 +49,7 @@ export const projects = [
     },
     role: { en: 'Motion Designer', zh: '动态设计师' },
     tools: ['After Effects', 'Premiere Pro'],
-    video: '/assets/projects/motion-vfx/typography-video.mp4',
+    video: '/videos/video-02.fs.mp4',
     cover: '/assets/projects/motion-vfx/typography-cover.jpg',
     tags: { en: ['Motion', 'Typography', 'After Effects'], zh: ['动态', '排版', 'After Effects'] },
     about: {
@@ -84,7 +84,7 @@ export const projects = [
     },
     role: { en: 'Motion Designer / VFX Artist', zh: '动态设计师 / 视效' },
     tools: ['After Effects', 'Premiere Pro'],
-    video: '/assets/projects/motion-vfx/video.mp4',
+    video: '/videos/video-03.fs.mp4',
     cover: '/assets/projects/motion-vfx/cover.jpg',
     tags: { en: ['VFX', 'Motion', 'After Effects'], zh: ['视效', '动态', 'After Effects'] },
     about: {
@@ -122,7 +122,7 @@ export const projects = [
     },
     role: { en: 'Video Editor / Colorist', zh: '剪辑 / 调色' },
     tools: ['Premiere Pro', 'DaVinci Resolve'],
-    video: '/assets/projects/fashion-film/video.mp4',
+    video: '/videos/video-04.fs.mp4',
     cover: '/assets/projects/fashion-film/cover.jpg',
     tags: { en: ['Commercial', 'Color', 'Cinematic'], zh: ['商业', '调色', '电影感'] },
     about: {
@@ -151,7 +151,7 @@ export const projects = [
     },
     role: { en: 'Video Editor', zh: '视频剪辑' },
     tools: ['Premiere Pro', 'DaVinci Resolve'],
-    video: '/assets/projects/vlog/video.mp4',
+    video: '/videos/video-05.fs.mp4',
     cover: '/assets/projects/vlog/cover.jpg',
     tags: { en: ['Vlog', 'Storytelling', 'Color'], zh: ['Vlog', '叙事', '调色'] },
     about: {
@@ -180,7 +180,7 @@ export const projects = [
     },
     role: { en: 'Editor / Creator', zh: '剪辑 / 创作者' },
     tools: ['Premiere Pro', 'After Effects'],
-    video: '/assets/projects/personal-edits/video01.mp4',
+    video: '/videos/video-06.fs.mp4',
     cover: '/assets/projects/personal-edits/cover.jpg',
     tags: { en: ['Editing', 'Creative', 'Music'], zh: ['剪辑', '创意', '音乐'] },
     about: {
