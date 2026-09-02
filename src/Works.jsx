@@ -26,7 +26,7 @@ const projects = [
     num: "02",
     name: "Drift",
     category: { en: "Motion Design", zh: "动态设计" },
-    year: "2025",
+    year: "2026",
     layout: "portrait-a",
     poster:
       "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=" +
@@ -41,7 +41,7 @@ const projects = [
     num: "03",
     name: "Ember",
     category: { en: "Game PV / VFX", zh: "游戏PV / 特效" },
-    year: "2025",
+    year: "2026",
     layout: "portrait-b",
     poster:
       "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=" +
@@ -56,7 +56,7 @@ const projects = [
     num: "04",
     name: "Pulse",
     category: { en: "Editing / Visual", zh: "剪辑 / 视觉" },
-    year: "2024",
+    year: "2026",
     layout: "wide",
     poster:
       "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=" +
@@ -66,7 +66,44 @@ const projects = [
       "&image_size=landscape_16_9",
     src: "/videos/video-04.mp4",
   },
+  {
+    id: 5,
+    num: "05",
+    name: "Verve",
+    category: { en: "Promo Film", zh: "宣传片" },
+    year: "2026",
+    layout: "promo",
+    poster:
+      "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=" +
+      encodeURIComponent(
+        "sleek commercial brand promotional film still, modern product advertising campaign on a dusty pink and charcoal studio set, elegant spotlight, cinematic commercial lighting, high-end brand mood, 35mm film grain, no text"
+      ) +
+      "&image_size=landscape_16_9",
+    src: "/videos/video-05.mp4",
+  },
+  {
+    id: 6,
+    num: "06",
+    name: "Field",
+    category: { en: "Explainer Film", zh: "科普片" },
+    year: "2026",
+    layout: "explainer",
+    poster:
+      "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=" +
+      encodeURIComponent(
+        "science documentary explainer film still, macro nature and floating luminous particles, soft dusty pink glow against a dark charcoal background, clean educational cinematic aesthetic, subtle film grain, no text"
+      ) +
+      "&image_size=portrait_4_3",
+    src: "/videos/video-06.mp4",
+  },
 ];
+
+/* ==================== 联系方式（替换为真实信息） ==================== */
+const LINKEDIN_URL = "https://www.linkedin.com/in/your-profile"; // TODO: 替换为真实领英主页
+const WECHAT_ID = "your-wechat-id"; // TODO: 替换为真实微信号
+// 简历 PDF：把文件命名为 resume.pdf 放到 public/ 目录后，
+// 把简历弹窗里的占位区替换为 <iframe src="/resume.pdf" /> 或下载链接即可
+// const RESUME_PDF = "/resume.pdf";
 
 /* ==================== 中英文案 ==================== */
 const t = {
@@ -74,97 +111,23 @@ const t = {
     navWork: "Work",
     navContact: "Contact",
     resume: "Resume",
-    kicker: "Selected Works — 2026",
-    sub: "Motion / Video / Visual",
     footer: "More works coming soon",
     close: "Close",
     resumeTitle: "Résumé",
-    resumeRole: "Video Editor & Motion Designer",
-    resumeFocus: "Fashion film · Motion graphics · Post-production",
-    expertiseLabel: "Expertise",
-    experienceLabel: "Experience",
-    resumeContact: "Contact",
+    resumePdfNote: "Résumé PDF — coming soon",
     contactTitle: "Contact",
-    contactHead: "Let’s make something",
-    contactLine:
-      "Open for collaborations, freelance & commissions.",
-    contactLocation: "Shanghai — Remote worldwide",
+    contactLocation: "Remote worldwide",
   },
   zh: {
     navWork: "作品",
     navContact: "联系",
     resume: "简历",
-    kicker: "精选作品 — 2026",
-    sub: "动态 / 影像 / 视觉",
     footer: "更多作品 即将更新",
     close: "关闭",
     resumeTitle: "简历",
-    resumeRole: "视频剪辑 · 动态设计师",
-    resumeFocus: "时尚影像 · 动态图形 · 后期制作",
-    expertiseLabel: "擅长领域",
-    experienceLabel: "经历",
-    resumeContact: "联系方式",
+    resumePdfNote: "简历 PDF 即将上传",
     contactTitle: "联系",
-    contactHead: "一起创作吧",
-    contactLine: "欢迎洽谈合作 / 自由职业 / 委托项目。",
-    contactLocation: "上海 — 可远程协作",
-  },
-};
-
-/* 简历内容：占位信息，可直接替换为真实经历 */
-const CONTACT_EMAIL = "hello@eve.studio"; // TODO: 替换为真实邮箱
-const resumeData = {
-  en: {
-    expertise: [
-      "Video Editing",
-      "Motion Design",
-      "Color Grading",
-      "VFX & Compositing",
-      "Sound Design",
-    ],
-    experience: [
-      {
-        time: "2024 — Now",
-        title: "Freelance Motion Designer",
-        org: "MCN · Brand campaigns",
-        desc: "Short-form edits, title sequences and campaign promos.",
-      },
-      {
-        time: "2023 — 2024",
-        title: "Video Editor",
-        org: "Game PV · Social content",
-        desc: "Game trailers and social-first video production.",
-      },
-      {
-        time: "2022 — 2023",
-        title: "Junior Editor",
-        org: "Production Studio",
-        desc: "Footage assembly, sync and finishing.",
-      },
-    ],
-  },
-  zh: {
-    expertise: ["视频剪辑", "动态设计", "调色", "特效合成", "声音设计"],
-    experience: [
-      {
-        time: "2024 — 至今",
-        title: "自由职业动态设计师",
-        org: "MCN · 品牌广告",
-        desc: "短视频剪辑、片头设计与品牌宣传物料。",
-      },
-      {
-        time: "2023 — 2024",
-        title: "视频剪辑师",
-        org: "游戏PV · 社交媒体内容",
-        desc: "游戏预告片与社媒优先的视频制作。",
-      },
-      {
-        time: "2022 — 2023",
-        title: "剪辑助理",
-        org: "制作工作室",
-        desc: "素材整理、对位与成片收尾。",
-      },
-    ],
+    contactLocation: "可远程协作",
   },
 };
 
@@ -173,7 +136,6 @@ export default function Works() {
   const [lang, setLang] = useState("en");
   const [modal, setModal] = useState(null); // 'resume' | 'contact' | null
   const tr = t[lang];
-  const rd = resumeData[lang];
 
   useEffect(() => {
     if (!modal) return undefined;
@@ -192,18 +154,26 @@ export default function Works() {
   const stopVideo = (id) => {
     const video = videoRefs.current.get(id);
     if (!video) return;
-    video.pause();
-    video.currentTime = 0;
+    try {
+      video.pause();
+    } catch {
+      // 忽略 pause 异常
+    }
+    try {
+      // readyState 不足或加载被中止时赋值可能抛错，忽略后 poster 仍会恢复
+      video.currentTime = 0;
+    } catch {
+      // 忽略：未 ready 时无需重置进度
+    }
   };
 
   // 鼠标进入：停止其他视频 → 当前视频从头播放（playing 状态由 onPlaying 决定）
   const handleMouseEnter = (id) => {
     setHoveredId(id);
 
-    videoRefs.current.forEach((otherVideo, otherId) => {
+    videoRefs.current.forEach((_otherVideo, otherId) => {
       if (otherId !== id) {
-        otherVideo.pause();
-        otherVideo.currentTime = 0;
+        stopVideo(otherId);
       }
     });
 
@@ -323,9 +293,7 @@ export default function Works() {
         <div className="works__grain" aria-hidden="true" />
 
         <header className="works__header">
-          <p className="works__kicker">{tr.kicker}</p>
           <h2 className="works__title">WORKS</h2>
-          <p className="works__sub">{tr.sub}</p>
         </header>
 
         {/* 作品拼贴：不对称 12 栏，横竖混排 */}
@@ -394,7 +362,7 @@ export default function Works() {
         </footer>
       </section>
 
-      {/* ————— 简历弹窗 ————— */}
+      {/* ————— 简历弹窗：PDF 占位区（上传 resume.pdf 后替换） ————— */}
       {modal === "resume" && (
         <div
           className="modal-overlay"
@@ -417,47 +385,18 @@ export default function Works() {
             </button>
 
             <p className="modal__kicker">{tr.resumeTitle}</p>
-            <h3 className="modal__script">eve</h3>
-            <p className="modal__role">{tr.resumeRole}</p>
-            <p className="modal__focus">{tr.resumeFocus}</p>
 
-            <div className="modal__section">
-              <h4 className="modal__label">{tr.expertiseLabel}</h4>
-              <ul className="modal__chips">
-                {rd.expertise.map((item) => (
-                  <li key={item} className="modal__chip">
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="modal__section">
-              <h4 className="modal__label">{tr.experienceLabel}</h4>
-              <ul className="modal__timeline">
-                {rd.experience.map((job) => (
-                  <li key={job.time} className="modal__job">
-                    <span className="modal__job-time">{job.time}</span>
-                    <div className="modal__job-body">
-                      <span className="modal__job-title">{job.title}</span>
-                      <span className="modal__job-org">{job.org}</span>
-                      <span className="modal__job-desc">{job.desc}</span>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="modal__section modal__section--contact">
-              <a className="modal__email" href={`mailto:${CONTACT_EMAIL}`}>
-                {CONTACT_EMAIL}
-              </a>
+            {/* PDF 上传占位区：把 resume.pdf 放进 public/ 后，
+                可将下方区块替换为 <iframe src="/resume.pdf" title="resume" /> */}
+            <div className="modal__pdf-slot">
+              <span className="modal__pdf-tag">PDF</span>
+              <p className="modal__pdf-note">{tr.resumePdfNote}</p>
             </div>
           </div>
         </div>
       )}
 
-      {/* ————— 联系弹窗 ————— */}
+      {/* ————— 联系弹窗：领英 + 微信 + 可远程协作 ————— */}
       {modal === "contact" && (
         <div
           className="modal-overlay"
@@ -480,11 +419,25 @@ export default function Works() {
             </button>
 
             <p className="modal__kicker">{tr.contactTitle}</p>
-            <h3 className="modal__head-serif">{tr.contactHead}</h3>
-            <p className="modal__line">{tr.contactLine}</p>
-            <a className="modal__email modal__email--big" href={`mailto:${CONTACT_EMAIL}`}>
-              {CONTACT_EMAIL}
-            </a>
+
+            <div className="contact-rows">
+              <a
+                className="contact-row"
+                href={LINKEDIN_URL}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <span className="contact-row__label">LinkedIn</span>
+                <span className="contact-row__value">↗</span>
+              </a>
+              <div className="contact-row">
+                <span className="contact-row__label">WeChat</span>
+                <span className="contact-row__value contact-row__value--mono">
+                  {WECHAT_ID}
+                </span>
+              </div>
+            </div>
+
             <p className="modal__location">{tr.contactLocation}</p>
           </div>
         </div>

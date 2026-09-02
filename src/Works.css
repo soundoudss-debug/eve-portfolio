@@ -208,16 +208,7 @@ html {
   z-index: 1;
   text-align: center;
   padding: 0 40px;
-  margin-bottom: 120px;
-}
-
-.works__kicker {
-  font-family: var(--font-condensed);
-  font-size: 0.8rem;
-  letter-spacing: 0.42em;
-  text-transform: uppercase;
-  color: var(--dusty-pink);
-  margin: 0 0 26px;
+  margin-bottom: 130px;
 }
 
 .works__title {
@@ -228,15 +219,6 @@ html {
   letter-spacing: 0.01em;
   color: var(--paper);
   margin: 0;
-}
-
-.works__sub {
-  font-family: var(--font-condensed);
-  font-size: 0.72rem;
-  letter-spacing: 0.4em;
-  text-transform: uppercase;
-  color: var(--paper-faint);
-  margin: 26px 0 0;
 }
 
 /* ============================================================
@@ -286,6 +268,22 @@ html {
 }
 .work--wide .work__media {
   aspect-ratio: 21 / 9;
+}
+
+.work--promo {
+  grid-column: span 7;
+  margin-top: 70px;
+}
+.work--promo .work__media {
+  aspect-ratio: 16 / 10;
+}
+
+.work--explainer {
+  grid-column: span 5;
+  margin-top: 120px;
+}
+.work--explainer .work__media {
+  aspect-ratio: 4 / 5;
 }
 
 .work__media {
@@ -483,165 +481,88 @@ html {
   margin: 0 0 6px;
 }
 
-.modal__script {
-  font-family: var(--font-script);
-  font-size: 3.2rem;
-  font-weight: 700;
-  line-height: 1;
-  margin: 0 0 10px;
-  color: var(--paper);
-  transform: rotate(-3deg);
-  transform-origin: left center;
+/* —— 简历 PDF 占位区（上传 resume.pdf 后替换为 <iframe>） —— */
+.modal__pdf-slot {
+  margin-top: 14px;
+  min-height: 340px;
+  border: 1.5px dashed rgba(233, 154, 175, 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 40px 24px;
 }
 
-.modal__role {
+.modal__pdf-tag {
+  font-family: var(--font-condensed);
+  font-size: 0.8rem;
+  letter-spacing: 0.36em;
+  color: var(--dusty-pink);
+  border: 1px solid rgba(233, 154, 175, 0.5);
+  padding: 8px 18px 8px 22px;
+}
+
+.modal__pdf-note {
+  margin: 0;
   font-family: var(--font-editorial);
   font-style: italic;
-  font-size: 1.2rem;
-  margin: 0 0 6px;
-  color: var(--paper);
+  font-size: 1.15rem;
+  color: var(--paper-dim);
+  text-align: center;
 }
 
-.modal__focus {
+/* —— 联系方式行（领英 / 微信） —— */
+.contact-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 28px 0 0;
+}
+
+.contact-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 18px 4px;
+  border-bottom: 1px solid rgba(241, 236, 229, 0.16);
+  text-decoration: none;
+  color: inherit;
+  transition: padding-left 0.25s var(--ease-editorial);
+}
+a.contact-row:hover {
+  padding-left: 12px;
+}
+a.contact-row:hover .contact-row__value {
+  color: var(--dusty-pink);
+}
+
+.contact-row__label {
   font-family: var(--font-condensed);
-  font-size: 0.74rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--paper-faint);
-  margin: 0 0 30px;
-}
-
-.modal__section {
-  margin-top: 28px;
-}
-
-.modal__label {
-  font-family: var(--font-condensed);
-  font-size: 0.72rem;
+  font-size: 0.82rem;
   letter-spacing: 0.34em;
   text-transform: uppercase;
-  color: var(--dusty-pink);
-  margin: 0 0 14px;
-}
-
-.modal__chips {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.modal__chip {
-  border: 1px solid rgba(233, 154, 175, 0.45);
-  padding: 6px 14px;
-  font-family: var(--font-condensed);
-  font-size: 0.74rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
   color: var(--paper-dim);
 }
 
-.modal__timeline {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.modal__job {
-  display: grid;
-  grid-template-columns: 110px 1fr;
-  gap: 20px;
-  padding-left: 16px;
-  border-left: 1px solid rgba(233, 154, 175, 0.35);
-}
-
-.modal__job-time {
-  font-family: var(--font-condensed);
-  font-size: 0.72rem;
-  letter-spacing: 0.18em;
-  color: var(--dusty-pink);
-  padding-top: 3px;
-}
-
-.modal__job-body {
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-}
-
-.modal__job-title {
+.contact-row__value {
   font-family: var(--font-editorial);
   font-style: italic;
-  font-size: 1.02rem;
+  font-size: 1.3rem;
   color: var(--paper);
+  transition: color 0.2s ease;
 }
 
-.modal__job-org {
+.contact-row__value--mono {
+  font-style: normal;
   font-family: var(--font-condensed);
-  font-size: 0.7rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--paper-faint);
-}
-
-.modal__job-desc {
-  font-size: 0.82rem;
-  line-height: 1.55;
-  color: var(--paper-dim);
-  margin-top: 4px;
-}
-
-.modal__section--contact {
-  margin-top: 32px;
-  padding-top: 20px;
-  border-top: 1px solid rgba(241, 236, 229, 0.14);
-}
-
-.modal__email {
-  font-family: var(--font-condensed);
-  font-size: 0.82rem;
-  letter-spacing: 0.18em;
-  color: var(--dusty-pink);
-  text-decoration: none;
-  border-bottom: 1px solid rgba(233, 154, 175, 0.4);
-  transition: opacity 0.2s ease;
-}
-.modal__email:hover {
-  opacity: 0.7;
-}
-
-.modal__head-serif {
-  font-family: var(--font-editorial);
-  font-style: italic;
-  font-weight: 500;
-  font-size: clamp(1.8rem, 4.5vw, 2.6rem);
-  line-height: 1.1;
-  margin: 8px 0 18px;
-  color: var(--paper);
-}
-
-.modal__line {
-  font-size: 0.92rem;
-  line-height: 1.6;
-  color: var(--paper-dim);
-  margin: 0 0 24px;
-}
-
-.modal__email--big {
-  font-family: var(--font-editorial);
-  font-style: italic;
-  font-size: 1.25rem;
-  letter-spacing: 0.02em;
-  text-transform: none;
+  font-size: 0.95rem;
+  letter-spacing: 0.22em;
 }
 
 .modal__location {
-  margin: 22px 0 0;
+  margin: 28px 0 0;
   font-family: var(--font-condensed);
   font-size: 0.72rem;
   letter-spacing: 0.28em;
@@ -669,19 +590,24 @@ html {
   }
 
   .work--feature,
-  .work--wide {
+  .work--wide,
+  .work--promo {
     grid-column: span 6;
+    margin-top: 0;
   }
   .work--portrait-a,
-  .work--portrait-b {
+  .work--portrait-b,
+  .work--explainer {
     grid-column: span 3;
     margin-top: 0;
   }
   .work--portrait-a .work__media,
-  .work--portrait-b .work__media {
+  .work--portrait-b .work__media,
+  .work--explainer .work__media {
     aspect-ratio: 3 / 4;
   }
-  .work--wide .work__media {
+  .work--wide .work__media,
+  .work--promo .work__media {
     aspect-ratio: 16 / 9;
   }
 }
@@ -734,7 +660,9 @@ html {
   .work--feature,
   .work--portrait-a,
   .work--portrait-b,
-  .work--wide {
+  .work--wide,
+  .work--promo,
+  .work--explainer {
     grid-column: span 1;
     margin-top: 0;
   }
@@ -742,7 +670,9 @@ html {
   .work--feature .work__media,
   .work--portrait-a .work__media,
   .work--portrait-b .work__media,
-  .work--wide .work__media {
+  .work--wide .work__media,
+  .work--promo .work__media,
+  .work--explainer .work__media {
     aspect-ratio: 16 / 10;
   }
 
@@ -759,8 +689,7 @@ html {
     padding: 40px 24px 32px;
   }
 
-  .modal__job {
-    grid-template-columns: 1fr;
-    gap: 6px;
+  .modal__pdf-slot {
+    min-height: 260px;
   }
 }
