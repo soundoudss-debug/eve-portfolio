@@ -222,7 +222,7 @@ html {
 }
 
 /* ============================================================
-   作品拼贴 —— 12 栏不对称，横竖混排
+   作品拼贴 —— 12 栏不对称，画面统一 16:9
    ============================================================ */
 .works__grid {
   position: relative;
@@ -242,53 +242,41 @@ html {
 .work--feature {
   grid-column: span 7;
 }
-.work--feature .work__media {
-  aspect-ratio: 16 / 10;
+
+.work--side-a {
+  grid-column: span 5;
+  margin-top: 100px;
 }
 
-.work--portrait-a {
+.work--side-b {
   grid-column: span 5;
-  margin-top: 110px;
-}
-.work--portrait-a .work__media {
-  aspect-ratio: 4 / 5;
-}
-
-.work--portrait-b {
-  grid-column: span 5;
-  margin-top: -30px;
-}
-.work--portrait-b .work__media {
-  aspect-ratio: 3 / 4;
+  margin-top: -20px;
 }
 
 .work--wide {
   grid-column: span 7;
-  margin-top: 60px;
-}
-.work--wide .work__media {
-  aspect-ratio: 21 / 9;
-}
-
-.work--promo {
-  grid-column: span 7;
   margin-top: 70px;
 }
-.work--promo .work__media {
-  aspect-ratio: 16 / 10;
+
+.work--wide-b {
+  grid-column: span 7;
+  margin-top: 40px;
 }
 
-.work--explainer {
+.work--side-c {
   grid-column: span 5;
   margin-top: 120px;
 }
-.work--explainer .work__media {
-  aspect-ratio: 4 / 5;
+
+.work--finale {
+  grid-column: span 12;
+  margin-top: 40px;
 }
 
 .work__media {
   position: relative;
   width: 100%;
+  aspect-ratio: 16 / 9;
   overflow: hidden;
   background: var(--dark-gray);
 }
@@ -590,25 +578,14 @@ a.contact-row:hover .contact-row__value {
   }
 
   .work--feature,
+  .work--side-a,
+  .work--side-b,
   .work--wide,
-  .work--promo {
+  .work--wide-b,
+  .work--side-c,
+  .work--finale {
     grid-column: span 6;
     margin-top: 0;
-  }
-  .work--portrait-a,
-  .work--portrait-b,
-  .work--explainer {
-    grid-column: span 3;
-    margin-top: 0;
-  }
-  .work--portrait-a .work__media,
-  .work--portrait-b .work__media,
-  .work--explainer .work__media {
-    aspect-ratio: 3 / 4;
-  }
-  .work--wide .work__media,
-  .work--promo .work__media {
-    aspect-ratio: 16 / 9;
   }
 }
 
@@ -658,22 +635,17 @@ a.contact-row:hover .contact-row__value {
   }
 
   .work--feature,
-  .work--portrait-a,
-  .work--portrait-b,
+  .work--side-a,
+  .work--side-b,
   .work--wide,
-  .work--promo,
-  .work--explainer {
+  .work--wide-b,
+  .work--side-c,
+  .work--finale {
     grid-column: span 1;
     margin-top: 0;
   }
-  .work__media,
-  .work--feature .work__media,
-  .work--portrait-a .work__media,
-  .work--portrait-b .work__media,
-  .work--wide .work__media,
-  .work--promo .work__media,
-  .work--explainer .work__media {
-    aspect-ratio: 16 / 10;
+  .work__media {
+    aspect-ratio: 16 / 9;
   }
 
   .work__name {

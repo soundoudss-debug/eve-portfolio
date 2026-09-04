@@ -4,14 +4,17 @@ import ReelSection from "./ReelSection.jsx";
 
 /* =====================================================================
    作品数据集中定义：poster / src 只在这里维护一次
-   category 双语；视频交互逻辑与独立 Demo 完全一致，未重写
+   name / tagline 双语；视频交互逻辑与独立 Demo 完全一致，未重写
    ===================================================================== */
 const projects = [
   {
     id: 1,
     num: "01",
-    name: "Bloom",
-    category: { en: "Fashion Film", zh: "时尚影像" },
+    name: { en: "Fashion Film", zh: "时尚影像" },
+    tagline: {
+      en: "Fashion film re-edit & visual packaging",
+      zh: "时尚影片重剪与视觉包装",
+    },
     year: "2026",
     layout: "feature",
     poster:
@@ -25,44 +28,53 @@ const projects = [
   {
     id: 2,
     num: "02",
-    name: "Drift",
-    category: { en: "Motion Design", zh: "动态设计" },
+    name: { en: "Game CG PV", zh: "游戏 CG 宣传片" },
+    tagline: {
+      en: "Game CG re-edit & promotional video",
+      zh: "游戏 CG 重剪与宣传短片",
+    },
     year: "2026",
-    layout: "portrait-a",
+    layout: "side-a",
     poster:
       "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=" +
       encodeURIComponent(
-        "abstract motion design still, flowing liquid metallic forms and light trails on a dark charcoal background, soft dusty pink highlights, experimental typographic energy, cinematic, grainy"
+        "cinematic game CG promotional trailer still, epic stylized game character with glowing dusty pink magical energy, dark charcoal fantasy environment, volumetric light, high-end game cinematics render, film grain, no text no logo"
       ) +
-      "&image_size=portrait_4_3",
+      "&image_size=landscape_16_9",
     src: "/videos/video-02.mp4",
   },
   {
     id: 3,
     num: "03",
-    name: "Ember",
-    category: { en: "Game PV / VFX", zh: "游戏PV / 特效" },
+    name: { en: "Vlog", zh: "生活 Vlog" },
+    tagline: {
+      en: "Lifestyle vlog & visual storytelling",
+      zh: "生活方式 Vlog 与视觉叙事",
+    },
     year: "2026",
-    layout: "portrait-b",
+    layout: "side-b",
     poster:
       "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=" +
       encodeURIComponent(
-        "cinematic game trailer vfx still, glowing pink embers and energy sparks in a dark charcoal void, volumetric light, high contrast, dramatic action mood, film grain, no text"
+        "lifestyle vlog film still, young creator holding a small camera on a sunlit cafe street, candid warm documentary moment, soft golden light, dusty pink and warm cream tones, analog film grain, storytelling mood, no text"
       ) +
-      "&image_size=portrait_4_3",
+      "&image_size=landscape_16_9",
     src: "/videos/video-03.mp4",
   },
   {
     id: 4,
     num: "04",
-    name: "Pulse",
-    category: { en: "Editing / Visual", zh: "剪辑 / 视觉" },
+    name: { en: "Music Visual / Mograph", zh: "音乐视觉 / 动态图形" },
+    tagline: {
+      en: "Motion graphics, typography & visual composition",
+      zh: "动态图形、字体排版与视觉构成",
+    },
     year: "2026",
     layout: "wide",
     poster:
       "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=" +
       encodeURIComponent(
-        "wide cinematic film editing montage still, overlapping analog film strips and light leaks on warm paper and dusty pink, charcoal shadows, experimental magazine collage feel, grain texture, letterbox mood"
+        "motion graphics still frame, kinetic typography and abstract geometric shapes in motion, dusty pink forms on dark charcoal background, bold editorial graphic composition, music visual energy, film grain, no readable text"
       ) +
       "&image_size=landscape_16_9",
     src: "/videos/video-04.mp4",
@@ -70,14 +82,17 @@ const projects = [
   {
     id: 5,
     num: "05",
-    name: "Verve",
-    category: { en: "Promo Film", zh: "宣传片" },
+    name: { en: "Music Visual / Mograph", zh: "音乐视觉 / 动态图形" },
+    tagline: {
+      en: "Motion graphics, typography & visual composition",
+      zh: "动态图形、字体排版与视觉构成",
+    },
     year: "2026",
-    layout: "promo",
+    layout: "wide-b",
     poster:
       "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=" +
       encodeURIComponent(
-        "sleek commercial brand promotional film still, modern product advertising campaign on a dusty pink and charcoal studio set, elegant spotlight, cinematic commercial lighting, high-end brand mood, 35mm film grain, no text"
+        "motion design still frame, glossy 3D chrome and glass abstract shapes floating, soft dusty pink lighting on dark charcoal, typographic composition fragments, premium mograph aesthetic, subtle film grain, no readable text"
       ) +
       "&image_size=landscape_16_9",
     src: "/videos/video-05.mp4",
@@ -85,17 +100,38 @@ const projects = [
   {
     id: 6,
     num: "06",
-    name: "Field",
-    category: { en: "Explainer Film", zh: "科普片" },
+    name: { en: "Art & Movement", zh: "艺术与律动" },
+    tagline: {
+      en: "Educational short film & motion design",
+      zh: "科普短片与动态设计",
+    },
     year: "2026",
-    layout: "explainer",
+    layout: "side-c",
     poster:
       "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=" +
       encodeURIComponent(
-        "science documentary explainer film still, macro nature and floating luminous particles, soft dusty pink glow against a dark charcoal background, clean educational cinematic aesthetic, subtle film grain, no text"
+        "educational short film still, dancer in flowing movement captured with graceful motion blur, art studio with warm light, dusty pink fabric trails, charcoal shadows, cinematic motion design mood, analog film grain, no text"
       ) +
-      "&image_size=portrait_4_3",
+      "&image_size=landscape_16_9",
     src: "/videos/video-06.mp4",
+  },
+  {
+    id: 7,
+    num: "07",
+    name: { en: "Solar System", zh: "太阳系" },
+    tagline: {
+      en: "Educational video & visual packaging",
+      zh: "科普视频与视觉包装",
+    },
+    year: "2026",
+    layout: "finale",
+    poster:
+      "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=" +
+      encodeURIComponent(
+        "cinematic solar system educational film still, planets aligned in deep charcoal space, soft dusty pink glowing sun and nebula clouds, stars, clean documentary aesthetic, subtle film grain, no text"
+      ) +
+      "&image_size=landscape_16_9",
+    src: "/videos/video-07.mp4",
   },
 ];
 
@@ -316,7 +352,7 @@ export default function Works() {
                   {/* 静态封面：常驻 DOM，z-index:1，永远是 fallback */}
                   <img
                     src={p.poster}
-                    alt={p.name}
+                    alt={p.name.en}
                     className="work__poster"
                     loading="lazy"
                   />
@@ -345,9 +381,9 @@ export default function Works() {
                 {/* 极小 editorial metadata：编号 / 名称 / 年份·类别 */}
                 <div className="work__meta">
                   <span className="work__num">{p.num}</span>
-                  <span className="work__name">{p.name}</span>
+                  <span className="work__name">{p.name[lang]}</span>
                   <span className="work__detail">
-                    {p.year}&nbsp;—&nbsp;{p.category[lang]}
+                    {p.year}&nbsp;—&nbsp;{p.tagline[lang]}
                   </span>
                 </div>
               </article>
