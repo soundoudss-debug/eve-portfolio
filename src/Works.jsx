@@ -226,8 +226,11 @@ export default function Works() {
     const playPromise = video.play();
     if (playPromise && typeof playPromise.then === "function") {
       playPromise.catch((error) => {
-        // 浏览器拒绝 autoplay 或播放失败：不设置 playingId，poster 继续显示
-        console.error("Video autoplay rejected:", error);
+        // AbortError：快速切换时 play() 被随后的 pause() 中断，属正常行为；
+        // 其他失败也由 onError 恢复 poster，无需向控制台输出
+        if (error?.name !== "AbortError") {
+          // 静默失败：poster 常驻，永远是 fallback
+        }
       });
     }
     // 绝不在此处 setPlayingId —— 必须等 onPlaying 真正触发
