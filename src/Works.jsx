@@ -15,7 +15,7 @@ const sections = [
       {
         id: 1,
         title: {
-          en: "VALORANT · Iso Skin Series PV Re-edit",
+          en: "VALORANT · Kuronami collection PV Re-edit",
           zh: "无畏契约 · 塑水宗系列皮肤 PV 再创作",
         },
         tags: {
@@ -24,11 +24,7 @@ const sections = [
         },
         year: "2026",
         poster:
-          "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=" +
-          encodeURIComponent(
-            "cinematic valorant fps game promotional trailer still, water elemental magical energy swirling around a tactical hero character, glowing cyan and dusty pink highlights, dark charcoal battlefield environment, volumetric light, high-end game cinematics render, film grain, no text no logo"
-          ) +
-          "&image_size=landscape_16_9",
+          "/covers/valorant.jpe",
         src: "/videos/video-02.mp4",
       },
       {
@@ -43,11 +39,7 @@ const sections = [
         },
         year: "2026",
         poster:
-          "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=" +
-          encodeURIComponent(
-            "retro music visual still frame, pink pantheress y2k aesthetic, kinetic typography in motion, glossy 3D chrome shapes, dusty pink and charcoal color palette, vintage grain, nostalgic dreamy mood, no readable text"
-          ) +
-          "&image_size=landscape_16_9",
+          "/covers/pp.jpg",
         src: "/videos/video-04.mp4",
       },
     ],
@@ -68,18 +60,14 @@ const sections = [
         },
         year: "2026",
         poster:
-          "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=" +
-          encodeURIComponent(
-            "high fashion bridal editorial film still, a model in elegant vivienne westwood style wedding gown, dramatic studio lighting, dusty pink and charcoal tones, luxury campaign mood, analog 35mm film grain, motion blur of fabric, no text"
-          ) +
-          "&image_size=landscape_16_9",
+          "/covers/vv.png",
         src: "/videos/video-01.mp4",
       },
       {
         id: 4,
         title: {
           en: "Notta AI Product Concept Promo",
-          zh: "Notta AI 产品概念宣传片",
+          zh: "Notta AI 产品概念宣传片(制作中...)",
         },
         tags: {
           en: "SaaS / Brand Commercial | PR + AE + AI | Ad concept · Live-action comp · Motion design · Product visual",
@@ -112,11 +100,7 @@ const sections = [
         },
         year: "2026",
         poster:
-          "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=" +
-          encodeURIComponent(
-            "art deco educational infographic film still, elegant geometric art deco patterns and golden typography on dark charcoal, dusty pink accents, knowledge content visual design, motion graphics mood, film grain, no readable text"
-          ) +
-          "&image_size=landscape_16_9",
+          "/covers/artdeco.jpe",
         src: "/videos/video-06.mp4",
       },
       {
@@ -142,7 +126,7 @@ const sections = [
         id: 7,
         title: {
           en: "Korean-style Vlog Opening Design",
-          zh: "韩系 Vlog 开头设计",
+          zh: "Vlog 开头设计",
         },
         tags: {
           en: "Vlog / Self-media | CapCut | Opening design · Rhythm cut · Fashion visual · Content packaging",
@@ -542,52 +526,53 @@ export default function Works() {
         </div>
       )}
 
-      {/* ————— 联系弹窗：领英 + 微信 + 可远程协作 ————— */}
-      {modal === "contact" && (
-        <div
-          className="modal-overlay"
-          onClick={() => setModal(null)}
-          role="presentation"
+    {/* ————— 联系弹窗：领英 + 微信 + 可远程协作 ————— */}
+{modal === "contact" && (
+  <div
+    className="modal-overlay"
+    onClick={() => setModal(null)}
+    role="presentation"
+  >
+    <div
+      className="modal modal--contact"
+      role="dialog"
+      aria-modal="true"
+      aria-label={tr.contactTitle}
+      onClick={(e) => e.stopPropagation()}
+    >
+      <button
+        type="button"
+        className="modal__close"
+        onClick={() => setModal(null)}
+      >
+        {tr.close} ✕
+      </button>
+
+      <p className="modal__kicker">{tr.contactTitle}</p>
+
+      <div className="contact-rows">
+        <a
+          className="contact-row"
+          href="https://www.linkedin.com/in/evy-s-30a204433"
+          target="_blank"
+          rel="noreferrer"
         >
-          <div
-            className="modal modal--contact"
-            role="dialog"
-            aria-modal="true"
-            aria-label={tr.contactTitle}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button
-              type="button"
-              className="modal__close"
-              onClick={() => setModal(null)}
-            >
-              {tr.close} ✕
-            </button>
+          <span className="contact-row__label">LinkedIn</span>
+          <span className="contact-row__value">↗</span>
+        </a>
 
-            <p className="modal__kicker">{tr.contactTitle}</p>
-
-            <div className="contact-rows">
-              <a
-                className="contact-row"
-                href={LINKEDIN_URL}
-                target="_blank"
-                rel="noreferrer"
-              >
-                <span className="contact-row__label">LinkedIn</span>
-                <span className="contact-row__value">↗</span>
-              </a>
-              <div className="contact-row">
-                <span className="contact-row__label">WeChat</span>
-                <span className="contact-row__value contact-row__value--mono">
-                  {WECHAT_ID}
-                </span>
-              </div>
-            </div>
-
-            <p className="modal__location">{tr.contactLocation}</p>
-          </div>
+        <div className="contact-row">
+          <span className="contact-row__label">WeChat</span>
+          <span className="contact-row__value contact-row__value--mono">
+            sangchokuu
+          </span>
         </div>
-      )}
-    </main>
-  );
+      </div>
+
+      <p className="modal__location">{tr.contactLocation}</p>
+    </div>
+  </div>
+)}
+</main>
+);
 }

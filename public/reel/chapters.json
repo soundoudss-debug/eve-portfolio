@@ -2,10 +2,40 @@
   "video": "/videos/reel.mp4",
   "note": "章节节点数据：调整节点时间只需改 t（秒）和标题。节点位置 left = t / duration，自动绑定视频总时长。后续接入后端时，把 ReelSection.jsx 里的 CHAPTERS_URL 换成接口地址，返回同样结构即可。",
   "chapters": [
-    { "t": 0.0,  "en": "Intro",   "zh": "开场" },
-    { "t": 11.5, "en": "Motion",  "zh": "动效" },
-    { "t": 23.0, "en": "Game",    "zh": "游戏" },
-    { "t": 34.5, "en": "Fashion", "zh": "时尚" },
-    { "t": 44.0, "en": "Finale",  "zh": "收尾" }
+    {
+      "t": 0.0,
+      "en": "mograph",
+      "zh": "动态",
+      "descEn": "Motion Graphics · Kinetic Typography · Visual Layout",
+      "descZh": "动态图形 · 动态排版 · 视觉构成"
+    },
+    {
+      "t": 10.0,
+      "en": "MV",
+      "zh": "MV",
+      "descEn": "Cinematic Editing · Music-driven Rhythm · Mood",
+      "descZh": "电影感剪辑 · 音乐节奏 · 氛围塑造"
+    },
+    {
+      "t": 23,
+      "en": "AMV",
+      "zh": "AMV",
+      "descEn": "Anime Music Video · Beat Sync · Stylized Visual",
+      "descZh": "AMV · 音乐卡点 · 风格化视觉"
+    },
+    {
+      "t": 30.5,
+      "en": "Game",
+      "zh": "游戏",
+      "descEn": "Gaming Edit · GMV · Valorant",
+      "descZh": "游戏剪辑 · GMV · 无畏契约"
+    },
+    {
+      "t": 38.5,
+      "en": "cinematic",
+      "zh": "卡点",
+      "descEn": "Music Video Reimagining · Beat Sync · Camera Movement",
+      "descZh": "电影感剪辑 · 卡点 · 运镜特效"
+    }
   ]
 }

@@ -584,9 +584,11 @@ a.contact-row:hover .contact-row__value {
 
 .contact-row__value--mono {
   font-style: normal;
-  font-family: var(--font-condensed);
-  font-size: 0.95rem;
-  letter-spacing: 0.22em;
+  font-family: "Trebuchet MS", Arial, sans-serif;
+  font-size: 0.92rem;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: none;
 }
 
 .modal__location {

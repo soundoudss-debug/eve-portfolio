@@ -16,6 +16,7 @@
 }
 
 /* —— 标题 —— */
+
 .reel__header {
   margin-bottom: 40px;
 }
@@ -49,6 +50,7 @@
 }
 
 /* —— 播放器 —— */
+
 .reel__frame {
   position: relative;
   background: #141212;
@@ -61,11 +63,13 @@
   align-items: center;
   justify-content: center;
 }
+
 .reel__frame:fullscreen .reel__video {
   width: 100%;
   height: 100%;
   object-fit: contain;
 }
+
 .reel__frame:fullscreen .reel__controls {
   position: absolute;
 }
@@ -87,6 +91,7 @@
 }
 
 /* —— 进度条 —— */
+
 .reel-bar {
   position: relative;
   height: 22px;
@@ -114,7 +119,8 @@
   pointer-events: none;
 }
 
-/* 章节节点 */
+/* —— 章节节点 —— */
+
 .reel-bar__node {
   position: absolute;
   top: 50%;
@@ -138,8 +144,10 @@
   border-radius: 50%;
   background: #141212;
   border: 2px solid var(--paper);
-  transition: transform 0.18s var(--ease-editorial),
-    background 0.18s ease, box-shadow 0.18s ease;
+  transition:
+    transform 0.18s var(--ease-editorial),
+    background 0.18s ease,
+    box-shadow 0.18s ease;
 }
 
 .reel-bar__node:hover .reel-bar__dot {
@@ -158,7 +166,8 @@
   box-shadow: 0 0 0 5px rgba(233, 154, 175, 0.3);
 }
 
-/* 节点悬浮提示 */
+/* —— 节点悬浮提示 —— */
+
 .reel-bar__tip {
   position: absolute;
   bottom: 30px;
@@ -175,6 +184,7 @@
 }
 
 /* —— 控制行 —— */
+
 .reel-controls__row {
   display: flex;
   align-items: center;
@@ -194,6 +204,7 @@
   cursor: pointer;
   transition: color 0.2s ease;
 }
+
 .reel-btn:hover {
   color: var(--dusty-pink);
 }
@@ -230,7 +241,51 @@
   cursor: pointer;
 }
 
+/* ============================================================
+   当前播放章节简介
+   视频下方 / 章节节点上方
+   ============================================================ */
+
+.reel-current {
+  margin-top: 28px;
+  padding: 4px 0 0;
+  min-height: 72px;
+  animation: reelChapterIn 0.32s var(--ease-editorial);
+}
+
+.reel-current__index {
+  font-family: var(--font-condensed);
+  font-size: 0.76rem;
+  line-height: 1.4;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--deep-rose);
+  margin: 0 0 8px;
+}
+
+.reel-current__desc {
+  font-family: var(--font-body);
+  font-size: 0.86rem;
+  letter-spacing: 0.04em;
+  color: rgba(43, 41, 41, 0.55);
+  line-height: 1.6;
+  margin: 0;
+}
+
+@keyframes reelChapterIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* —— 章节列表 —— */
+
 .reel-chapters {
   margin-top: 28px;
 }
@@ -260,8 +315,12 @@
   cursor: pointer;
   font-family: var(--font-condensed);
   color: var(--dark-gray);
-  transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    color 0.2s ease;
 }
+
 .reel-chip:hover {
   border-color: var(--dusty-pink);
   color: var(--deep-rose);
@@ -288,18 +347,22 @@
   border-color: var(--dusty-pink);
   color: var(--charcoal);
 }
+
 .reel-chip.is-active .reel-chip__time {
   color: rgba(43, 41, 41, 0.65);
 }
 
 /* —— 响应式 —— */
+
 @media (max-width: 720px) {
   .reel {
     padding: 90px 0 100px;
   }
+
   .reel__inner {
     padding: 0 20px;
   }
+
   .reel__header {
     margin-bottom: 28px;
   }
@@ -307,14 +370,32 @@
   .reel__controls {
     padding: 28px 12px 8px;
   }
+
   .reel-hint {
     display: none;
   }
+
   .reel-volume {
     width: 52px;
   }
+
   .reel-time {
     font-size: 0.72rem;
+  }
+
+  .reel-current {
+    margin-top: 22px;
+    min-height: 64px;
+  }
+
+  .reel-current__index {
+    font-size: 0.7rem;
+    margin-bottom: 6px;
+  }
+
+  .reel-current__desc {
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
   }
 
   .reel-chapters__list {
@@ -323,6 +404,7 @@
     padding-bottom: 8px;
     -webkit-overflow-scrolling: touch;
   }
+
   .reel-chip {
     flex: 0 0 auto;
   }
