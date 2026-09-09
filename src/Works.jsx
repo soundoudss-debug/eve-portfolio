@@ -4,136 +4,168 @@ import ReelSection from "./ReelSection.jsx";
 
 /* =====================================================================
    作品数据集中定义：poster / src 只在这里维护一次
-   name / tagline 双语；视频交互逻辑与独立 Demo 完全一致，未重写
+   title / tags 双语；视频交互逻辑与独立 Demo 完全一致，未重写
+   分类：game 游戏PV / brand 品牌商业 / newmedia 新媒体内容 / reel 风格速览
    ===================================================================== */
-const projects = [
+const sections = [
   {
-    id: 1,
-    num: "01",
-    name: { en: "Fashion Film", zh: "时尚影像" },
-    tagline: {
-      en: "Fashion film re-edit & visual packaging",
-      zh: "时尚影片重剪与视觉包装",
-    },
-    year: "2026",
-    layout: "feature",
-    poster:
-      "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=" +
-      encodeURIComponent(
-        "high fashion editorial film still, a model in soft pink tulle against a charcoal studio backdrop, dramatic rim light, analog 35mm film grain, muted dusty pink and dark charcoal tones, magazine campaign, motion blur of fabric"
-      ) +
-      "&image_size=landscape_16_9",
-    src: "/videos/video-01.mp4",
+    id: "game",
+    title: { en: "Game PV", zh: "游戏PV" },
+    works: [
+      {
+        id: 1,
+        title: {
+          en: "VALORANT · Iso Skin Series PV Re-edit",
+          zh: "无畏契约 · 塑水宗系列皮肤 PV 再创作",
+        },
+        tags: {
+          en: "Game Promo | PR + AE | Shot restructuring · Beat sync · Visual packaging",
+          zh: "游戏宣传向 | PR + AE | 镜头重组 · 节奏卡点 · 视觉包装",
+        },
+        year: "2026",
+        poster:
+          "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=" +
+          encodeURIComponent(
+            "cinematic valorant fps game promotional trailer still, water elemental magical energy swirling around a tactical hero character, glowing cyan and dusty pink highlights, dark charcoal battlefield environment, volumetric light, high-end game cinematics render, film grain, no text no logo"
+          ) +
+          "&image_size=landscape_16_9",
+        src: "/videos/video-02.mp4",
+      },
+      {
+        id: 2,
+        title: {
+          en: "PinkPantheress · Illegal Motion Visual",
+          zh: "PinkPantheress · Illegal 动效视觉",
+        },
+        tags: {
+          en: "Music Visual / Mograph | AE | 3D camera · Kinetic type · Retro visual · Motion Design",
+          zh: "Music Visual / Mograph | AE | 3D运镜 · 动态排版 · 复古视觉 · Motion Design",
+        },
+        year: "2026",
+        poster:
+          "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=" +
+          encodeURIComponent(
+            "retro music visual still frame, pink pantheress y2k aesthetic, kinetic typography in motion, glossy 3D chrome shapes, dusty pink and charcoal color palette, vintage grain, nostalgic dreamy mood, no readable text"
+          ) +
+          "&image_size=landscape_16_9",
+        src: "/videos/video-04.mp4",
+      },
+    ],
   },
   {
-    id: 2,
-    num: "02",
-    name: { en: "Game CG PV", zh: "游戏 CG 宣传片" },
-    tagline: {
-      en: "Game CG re-edit & promotional video",
-      zh: "游戏 CG 重剪与宣传短片",
-    },
-    year: "2026",
-    layout: "side-a",
-    poster:
-      "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=" +
-      encodeURIComponent(
-        "cinematic game CG promotional trailer still, epic stylized game character with glowing dusty pink magical energy, dark charcoal fantasy environment, volumetric light, high-end game cinematics render, film grain, no text no logo"
-      ) +
-      "&image_size=landscape_16_9",
-    src: "/videos/video-02.mp4",
+    id: "brand",
+    title: { en: "Brand & Commercial", zh: "品牌商业" },
+    works: [
+      {
+        id: 3,
+        title: {
+          en: "Vivienne Westwood Bridal 2022 Fashion Promo",
+          zh: "Vivienne Westwood Bridal 2022 时尚宣传片",
+        },
+        tags: {
+          en: "Fashion Commercial | PR + AE | Music cut · Rhythm design · Stylized visual · Mood",
+          zh: "时尚商业向 | PR + AE | 音乐剪辑 · 节奏设计 · 风格化视觉 · 氛围塑造",
+        },
+        year: "2026",
+        poster:
+          "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=" +
+          encodeURIComponent(
+            "high fashion bridal editorial film still, a model in elegant vivienne westwood style wedding gown, dramatic studio lighting, dusty pink and charcoal tones, luxury campaign mood, analog 35mm film grain, motion blur of fabric, no text"
+          ) +
+          "&image_size=landscape_16_9",
+        src: "/videos/video-01.mp4",
+      },
+      {
+        id: 4,
+        title: {
+          en: "Notta AI Product Concept Promo",
+          zh: "Notta AI 产品概念宣传片",
+        },
+        tags: {
+          en: "SaaS / Brand Commercial | PR + AE + AI | Ad concept · Live-action comp · Motion design · Product visual",
+          zh: "SaaS / 品牌商业向 | PR + AE + AI | 广告策划 · 实景合成 · 动效设计 · 产品视觉",
+        },
+        year: "2026",
+        poster:
+          "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=" +
+          encodeURIComponent(
+            "modern SaaS product commercial film still, AI transcription software interface floating above a clean desk, soft natural light, dusty pink and charcoal tech aesthetic, premium brand advertising mood, cinematic, subtle film grain, no readable text"
+          ) +
+          "&image_size=landscape_16_9",
+        src: "/videos/video-05.mp4",
+      },
+    ],
   },
   {
-    id: 3,
-    num: "03",
-    name: { en: "Vlog", zh: "生活 Vlog" },
-    tagline: {
-      en: "Lifestyle vlog & visual storytelling",
-      zh: "生活方式 Vlog 与视觉叙事",
-    },
-    year: "2026",
-    layout: "side-b",
-    poster:
-      "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=" +
-      encodeURIComponent(
-        "lifestyle vlog film still, young creator holding a small camera on a sunlit cafe street, candid warm documentary moment, soft golden light, dusty pink and warm cream tones, analog film grain, storytelling mood, no text"
-      ) +
-      "&image_size=landscape_16_9",
-    src: "/videos/video-03.mp4",
-  },
-  {
-    id: 4,
-    num: "04",
-    name: { en: "Music Visual / Mograph", zh: "音乐视觉 / 动态图形" },
-    tagline: {
-      en: "Motion graphics, typography & visual composition",
-      zh: "动态图形、字体排版与视觉构成",
-    },
-    year: "2026",
-    layout: "wide",
-    poster:
-      "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=" +
-      encodeURIComponent(
-        "motion graphics still frame, kinetic typography and abstract geometric shapes in motion, dusty pink forms on dark charcoal background, bold editorial graphic composition, music visual energy, film grain, no readable text"
-      ) +
-      "&image_size=landscape_16_9",
-    src: "/videos/video-04.mp4",
-  },
-  {
-    id: 5,
-    num: "05",
-    name: { en: "Music Visual / Mograph", zh: "音乐视觉 / 动态图形" },
-    tagline: {
-      en: "Motion graphics, typography & visual composition",
-      zh: "动态图形、字体排版与视觉构成",
-    },
-    year: "2026",
-    layout: "wide-b",
-    poster:
-      "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=" +
-      encodeURIComponent(
-        "motion design still frame, glossy 3D chrome and glass abstract shapes floating, soft dusty pink lighting on dark charcoal, typographic composition fragments, premium mograph aesthetic, subtle film grain, no readable text"
-      ) +
-      "&image_size=landscape_16_9",
-    src: "/videos/video-05.mp4",
-  },
-  {
-    id: 6,
-    num: "06",
-    name: { en: "Art & Movement", zh: "艺术与律动" },
-    tagline: {
-      en: "Educational short film & motion design",
-      zh: "科普短片与动态设计",
-    },
-    year: "2026",
-    layout: "side-c",
-    poster:
-      "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=" +
-      encodeURIComponent(
-        "educational short film still, dancer in flowing movement captured with graceful motion blur, art studio with warm light, dusty pink fabric trails, charcoal shadows, cinematic motion design mood, analog film grain, no text"
-      ) +
-      "&image_size=landscape_16_9",
-    src: "/videos/video-06.mp4",
-  },
-  {
-    id: 7,
-    num: "07",
-    name: { en: "Solar System", zh: "太阳系" },
-    tagline: {
-      en: "Educational video & visual packaging",
-      zh: "科普视频与视觉包装",
-    },
-    year: "2026",
-    layout: "finale",
-    poster:
-      "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=" +
-      encodeURIComponent(
-        "cinematic solar system educational film still, planets aligned in deep charcoal space, soft dusty pink glowing sun and nebula clouds, stars, clean documentary aesthetic, subtle film grain, no text"
-      ) +
-      "&image_size=landscape_16_9",
-    src: "/videos/video-07.mp4",
+    id: "newmedia",
+    title: { en: "New Media", zh: "新媒体内容" },
+    works: [
+      {
+        id: 5,
+        title: {
+          en: "Art Deco English Educational Visual",
+          zh: "Art Deco 英文科普视觉",
+        },
+        tags: {
+          en: "Knowledge / New Media | CapCut | Info visualization · Dynamic subtitles · AI-assisted · Rhythm cut",
+          zh: "知识类内容 / 新媒体向 | CapCut | 信息可视化 · 动态字幕 · AI辅助 · 节奏剪辑",
+        },
+        year: "2026",
+        poster:
+          "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=" +
+          encodeURIComponent(
+            "art deco educational infographic film still, elegant geometric art deco patterns and golden typography on dark charcoal, dusty pink accents, knowledge content visual design, motion graphics mood, film grain, no readable text"
+          ) +
+          "&image_size=landscape_16_9",
+        src: "/videos/video-06.mp4",
+      },
+      {
+        id: 6,
+        title: {
+          en: "Solar System Educational Video",
+          zh: "Solar System 太阳系科普视频",
+        },
+        tags: {
+          en: "New Media Content | PR + CapCut | Info integration · Visual storytelling · Dynamic packaging · Long-form cut",
+          zh: "新媒体内容向 | PR + CapCut | 信息整合 · 视觉叙事 · 动态包装 · 长视频剪辑",
+        },
+        year: "2026",
+        poster:
+          "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=" +
+          encodeURIComponent(
+            "cinematic solar system educational film still, planets aligned in deep charcoal space, soft dusty pink glowing sun and nebula clouds, stars, clean documentary aesthetic, subtle film grain, no text"
+          ) +
+          "&image_size=landscape_16_9",
+        src: "/videos/video-07.mp4",
+      },
+      {
+        id: 7,
+        title: {
+          en: "Korean-style Vlog Opening Design",
+          zh: "韩系 Vlog 开头设计",
+        },
+        tags: {
+          en: "Vlog / Self-media | CapCut | Opening design · Rhythm cut · Fashion visual · Content packaging",
+          zh: "Vlog / 自媒体向 | CapCut | 开场设计 · 节奏剪辑 · 时尚视觉 · 内容包装",
+        },
+        year: "2026",
+        poster:
+          "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=" +
+          encodeURIComponent(
+            "korean lifestyle vlog opening still, soft pastel korean aesthetic, young woman in cozy cafe with camera, warm natural light, dusty pink and cream tones, trendy vlog visual mood, analog film grain, no text"
+          ) +
+          "&image_size=landscape_16_9",
+        src: "/videos/video-03.mp4",
+      },
+    ],
   },
 ];
+
+/* 第 4 个分类「风格速览」由底部 ReelSection 承载 */
+const reelLabel = {
+  en: "Style Reel",
+  zh: "风格速览",
+};
 
 /* ==================== 联系方式（替换为真实信息） ==================== */
 const LINKEDIN_URL = "https://www.linkedin.com/in/your-profile"; // TODO: 替换为真实领英主页
@@ -170,9 +202,53 @@ const t = {
 
 export default function Works() {
   /* ==================== 语言 / 弹窗 ==================== */
-  const [lang, setLang] = useState("en");
+  const [lang, setLang] = useState("zh");
   const [modal, setModal] = useState(null); // 'resume' | 'contact' | null
   const tr = t[lang];
+
+  /* ==================== 分类导航：滚动高亮 + 吸顶 ==================== */
+  const [activeCat, setActiveCat] = useState("game");
+  const sectionIds = ["game", "brand", "newmedia", "reel"];
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        // 取当前最靠近视口顶部且可见的 section
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+        if (visible[0]) {
+          setActiveCat(visible[0].target.dataset.cat);
+        }
+      },
+      {
+        rootMargin: "-45% 0px -50% 0px",
+        threshold: 0,
+      }
+    );
+
+    sectionIds.forEach((id) => {
+      const el = id === "reel" ? document.getElementById("reel") : document.getElementById(`sec-${id}`);
+      if (el) observer.observe(el);
+    });
+    return () => observer.disconnect();
+  }, []);
+
+  /* 首屏自动停在「游戏PV」区块顶部（仅一次） */
+  const scrolledRef = useRef(false);
+  useEffect(() => {
+    if (scrolledRef.current) return;
+    const el = document.getElementById("sec-game");
+    if (el) {
+      scrolledRef.current = true;
+      el.scrollIntoView({ behavior: "auto", block: "start" });
+    }
+  }, []);
+
+  const scrollToCat = (id) => {
+    const el = id === "reel" ? document.getElementById("reel") : document.getElementById(`sec-${id}`);
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
 
   useEffect(() => {
     if (!modal) return undefined;
@@ -272,6 +348,55 @@ export default function Works() {
     };
   }, []);
 
+  const renderWork = (p) => {
+    const isHovered = hoveredId === p.id;
+    const isPlaying = playingId === p.id;
+    return (
+      <article
+        key={p.id}
+        className={`work${isHovered ? " is-hovered" : ""}${isPlaying ? " is-playing" : ""}`}
+        onMouseEnter={() => handleMouseEnter(p.id)}
+        onMouseLeave={() => handleMouseLeave(p.id)}
+      >
+        <div className="work__media">
+          {/* 静态封面：常驻 DOM，z-index:1，永远是 fallback */}
+          <img
+            src={p.poster}
+            alt={p.title.en}
+            className="work__poster"
+            loading="lazy"
+          />
+          {/* 视频：常驻 DOM，z-index:2，仅通过 opacity 控制 */}
+          <video
+            ref={(element) => {
+              if (element) {
+                videoRefs.current.set(p.id, element);
+              } else {
+                videoRefs.current.delete(p.id);
+              }
+            }}
+            className="work__video"
+            src={p.src}
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            controls={isHovered}
+            onPlaying={() => handlePlaying(p.id)}
+            onError={() => handleError(p.id)}
+            onEnded={() => handleEnded(p.id)}
+          />
+        </div>
+
+        {/* 标题（1行） + 能力标签（1行） */}
+        <div className="work__meta">
+          <span className="work__name">{p.title[lang]}</span>
+          <span className="work__tags">{p.tags[lang]}</span>
+        </div>
+      </article>
+    );
+  };
+
   return (
     <main className="works-page" id="top">
       {/* ————— NAV（暖纸底：eve 左 / Work·Contact 中 / 2026 + EN中 右） ————— */}
@@ -336,63 +461,41 @@ export default function Works() {
           <h2 className="works__title">WORKS</h2>
         </header>
 
-        {/* 作品拼贴：不对称 12 栏，横竖混排 */}
-        <div className="works__grid">
-          {projects.map((p) => {
-            const isHovered = hoveredId === p.id;
-            const isPlaying = playingId === p.id;
-
-            return (
-              <article
-                key={p.id}
-                className={`work work--${p.layout}${
-                  isHovered ? " is-hovered" : ""
-                }${isPlaying ? " is-playing" : ""}`}
-                onMouseEnter={() => handleMouseEnter(p.id)}
-                onMouseLeave={() => handleMouseLeave(p.id)}
-              >
-                <div className="work__media">
-                  {/* 静态封面：常驻 DOM，z-index:1，永远是 fallback */}
-                  <img
-                    src={p.poster}
-                    alt={p.name.en}
-                    className="work__poster"
-                    loading="lazy"
-                  />
-                  {/* 视频：常驻 DOM，z-index:2，仅通过 opacity 控制 */}
-                  <video
-                    ref={(element) => {
-                      if (element) {
-                        videoRefs.current.set(p.id, element);
-                      } else {
-                        videoRefs.current.delete(p.id);
-                      }
-                    }}
-                    className="work__video"
-                    src={p.src}
-                    muted
-                    loop
-                    playsInline
-                    preload="metadata"
-                    controls={isHovered}
-                    onPlaying={() => handlePlaying(p.id)}
-                    onError={() => handleError(p.id)}
-                    onEnded={() => handleEnded(p.id)}
-                  />
-                </div>
-
-                {/* 极小 editorial metadata：编号 / 名称 / 年份·类别 */}
-                <div className="work__meta">
-                  <span className="work__num">{p.num}</span>
-                  <span className="work__name">{p.name[lang]}</span>
-                  <span className="work__detail">
-                    {p.year}&nbsp;—&nbsp;{p.tagline[lang]}
-                  </span>
-                </div>
-              </article>
-            );
-          })}
+        {/* 分类导航：吸顶，滚动高亮，点击平滑跳转 */}
+        <div className="works-catnav" role="tablist" aria-label="Works categories">
+          {sections.map((s) => (
+            <button
+              key={s.id}
+              type="button"
+              role="tab"
+              aria-selected={activeCat === s.id}
+              className={`works-catnav__btn ${activeCat === s.id ? "is-active" : ""}`}
+              onClick={() => scrollToCat(s.id)}
+            >
+              {s.title[lang]}
+            </button>
+          ))}
+          <button
+            type="button"
+            role="tab"
+            aria-selected={activeCat === "reel"}
+            className={`works-catnav__btn ${activeCat === "reel" ? "is-active" : ""}`}
+            onClick={() => scrollToCat("reel")}
+          >
+            {reelLabel[lang]}
+          </button>
         </div>
+
+        {/* 作品分区：单列大尺寸 */}
+        {sections.map((s) => (
+          <section key={s.id} id={`sec-${s.id}`} data-cat={s.id} className="works-section">
+            <h3 className="works-section__title">
+              <span className="works-section__index">{s.title.en}</span>
+              {s.title[lang]}
+            </h3>
+            <div className="works-section__list">{s.works.map(renderWork)}</div>
+          </section>
+        ))}
 
         <footer className="works__foot">
           <span className="works__foot-text">{tr.footer}</span>
@@ -402,7 +505,7 @@ export default function Works() {
         </footer>
       </section>
 
-      {/* ————— 底部剪辑集锦播放器（章节节点进度条） ————— */}
+      {/* ————— 底部剪辑集锦播放器（章节节点进度条）——— 第 4 分类「风格速览」 ————— */}
       <ReelSection lang={lang} />
 
       {/* ————— 简历弹窗：PDF 占位区（上传 resume.pdf 后替换） ————— */}

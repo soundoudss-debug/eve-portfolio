@@ -19,30 +19,31 @@ const REEL_POSTER =
   ) +
   "&image_size=landscape_16_9";
 
-/* JSON 取不到时的兜底节点 */
+/* JSON 取不到时的兜底节点：5 个占位，按视频总时长(~46s)大致均匀排布 */
 const DEFAULT_CHAPTERS = [
   { t: 0.0, en: "Intro", zh: "开场" },
-  { t: 8.5, en: "Fast Cuts", zh: "快剪" },
-  { t: 18.0, en: "Transitions", zh: "转场" },
-  { t: 27.5, en: "Color", zh: "调色" },
-  { t: 38.0, en: "Finale", zh: "收尾" },
+  { t: 11.5, en: "Motion", zh: "动效" },
+  { t: 23.0, en: "Game", zh: "游戏" },
+  { t: 34.5, en: "Fashion", zh: "时尚" },
+  { t: 44.0, en: "Finale", zh: "收尾" },
 ];
 
 const copy = {
   en: {
     kicker: "Edit Reel — 2026",
-    title: "Reel",
+    title: "Style Reel · All-genre Edit Collection",
     chapters: "Clips",
     play: "Play",
     pause: "Pause",
     mute: "Mute",
     unmute: "Unmute",
     fullscreen: "Fullscreen",
-    hint: "Click a node to jump to a clip",
+    hint: "Click progress nodes to jump to clips",
+    note: "Click a node on the progress bar to jump to that clip and quickly browse different styles.",
   },
   zh: {
     kicker: "剪辑集锦 — 2026",
-    title: "集锦",
+    title: "风格速览 · 全品类剪辑集锦",
     chapters: "片段节点",
     play: "播放",
     pause: "暂停",
@@ -50,6 +51,7 @@ const copy = {
     unmute: "取消静音",
     fullscreen: "全屏",
     hint: "点击进度条上的节点，跳转到对应片段",
+    note: "点击进度条节点可跳转对应片段，快速浏览不同风格作品",
   },
 };
 
@@ -179,11 +181,12 @@ export default function ReelSection({ lang }) {
   const L = copy[lang];
 
   return (
-    <section className="reel" id="reel">
+    <section className="reel" id="reel" data-cat="reel">
       <div className="reel__inner">
         <header className="reel__header">
           <p className="reel__kicker">{L.kicker}</p>
           <h2 className="reel__title">{L.title}</h2>
+          <p className="reel__note">{L.note}</p>
         </header>
 
         <div className="reel__frame" ref={frameRef}>

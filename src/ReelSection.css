@@ -39,6 +39,15 @@
   margin: 0;
 }
 
+.reel__note {
+  margin: 18px 0 0;
+  font-family: var(--font-body);
+  font-size: 0.86rem;
+  letter-spacing: 0.04em;
+  color: rgba(43, 41, 41, 0.55);
+  line-height: 1.6;
+}
+
 /* —— 播放器 —— */
 .reel__frame {
   position: relative;
