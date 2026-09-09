@@ -25,7 +25,7 @@ const sections = [
         year: "2026",
         poster:
           "/covers/valorant.jpe",
-        src: "/videos/video-02.mp4",
+        src: "https://res.cloudinary.com/jzfj58ji/video/upload/v1788945989/video-02.mp4",
       },
       {
         id: 2,
@@ -40,7 +40,7 @@ const sections = [
         year: "2026",
         poster:
           "/covers/pp.jpg",
-        src: "/videos/video-04.mp4",
+        src: "https://res.cloudinary.com/jzfj58ji/video/upload/v1788945987/video-04.mp4",
       },
     ],
   },
@@ -61,7 +61,7 @@ const sections = [
         year: "2026",
         poster:
           "/covers/vv.png",
-        src: "/videos/video-01.mp4",
+        src: "https://res.cloudinary.com/jzfj58ji/video/upload/v1788945965/video-01.mp4",
       },
       {
         id: 4,
@@ -101,7 +101,7 @@ const sections = [
         year: "2026",
         poster:
           "/covers/artdeco.jpe",
-        src: "/videos/video-06.mp4",
+        src: "https://res.cloudinary.com/jzfj58ji/video/upload/v1788945980/video-06.mp4",
       },
       {
         id: 6,
@@ -120,12 +120,12 @@ const sections = [
             "cinematic solar system educational film still, planets aligned in deep charcoal space, soft dusty pink glowing sun and nebula clouds, stars, clean documentary aesthetic, subtle film grain, no text"
           ) +
           "&image_size=landscape_16_9",
-        src: "/videos/video-07.mp4",
+        src: "https://res.cloudinary.com/jzfj58ji/video/upload/v1788945995/video-07.mp4",
       },
       {
         id: 7,
         title: {
-          en: "Korean-style Vlog Opening Design",
+          en: "fashion Vlog Design",
           zh: "Vlog 开头设计",
         },
         tags: {
@@ -139,7 +139,7 @@ const sections = [
             "korean lifestyle vlog opening still, soft pastel korean aesthetic, young woman in cozy cafe with camera, warm natural light, dusty pink and cream tones, trendy vlog visual mood, analog film grain, no text"
           ) +
           "&image_size=landscape_16_9",
-        src: "/videos/video-03.mp4",
+        src: "https://res.cloudinary.com/jzfj58ji/video/upload/v1788945977/video-03.mp4",
       },
     ],
   },

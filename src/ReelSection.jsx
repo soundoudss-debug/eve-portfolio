@@ -9,7 +9,7 @@ REEL —— 底部「剪辑集锦」播放器
 - 时间以 <video> 元素为唯一事实来源
 ===================================================================== */
 
-const REEL_VIDEO = `${import.meta.env.BASE_URL}videos/reel.mp4`;
+const REEL_VIDEO = "https://res.cloudinary.com/jzfj58ji/video/upload/v1788945959/reel.mp4";
 
 const CHAPTERS_URL = `${import.meta.env.BASE_URL}reel/chapters.json`;
 
@@ -71,7 +71,7 @@ const copy = {
 
   zh: {
     kicker: "剪辑集锦 — 2026",
-    title: "风格速览",
+    title: "风格速览 · 剪辑集锦",
     chapters: "片段节点",
     play: "播放",
     pause: "暂停",
