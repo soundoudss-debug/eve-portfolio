@@ -1,6 +1,6 @@
 /* =====================================================================
    EVE — 实验性时尚杂志作品集
-   结构：NAV（暖纸） → 粉色 RESUME 窄条 → 炭灰 WORKS 拼贴 → 弹窗
+   结构：NAV（暖纸，含 RESUME） → 炭灰 WORKS 拼贴 → 弹窗
    视频层：poster z:1 永远在底 / video z:2 仅 opacity 切换；装饰不遮挡 video
    ===================================================================== */
 
@@ -94,6 +94,41 @@ html {
   gap: 26px;
 }
 
+.nav__resume {
+  /* eve logo 同款手写花体；中文回退到楷体，保持花体感 */
+  font-family: "Dancing Script", "Brush Script MT", "STKaiti", "KaiTi", cursive;
+  font-weight: 700;
+  font-size: 1.25rem;
+  line-height: 1;
+  color: var(--deep-rose);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  position: relative;
+  transform: rotate(-3deg);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.nav__resume::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 100%;
+  height: 1px;
+  background: var(--deep-rose);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.35s var(--ease-editorial);
+}
+.nav__resume:hover {
+  opacity: 0.75;
+  transform: rotate(-3deg) translateY(-1px);
+}
+.nav__resume:hover::after {
+  transform: scaleX(1);
+}
+
 .nav__year {
   font-family: var(--font-condensed);
   font-size: 0.78rem;
@@ -129,56 +164,6 @@ html {
 }
 .nav__lang-sep {
   color: rgba(43, 41, 41, 0.3);
-}
-
-/* ============================================================
-   粉色 RESUME 窄条
-   ============================================================ */
-.resume-strip {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 66px;
-  background: var(--dusty-pink);
-  overflow: hidden;
-}
-
-.resume-strip__halftone {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background-image: radial-gradient(rgba(43, 41, 41, 0.16) 1px, transparent 1.5px);
-  background-size: 5px 5px;
-  mix-blend-mode: multiply;
-}
-
-.resume-strip__btn {
-  position: relative;
-  z-index: 1;
-  background: none;
-  border: none;
-  padding: 4px 6px 6px;
-  cursor: pointer;
-  font-family: var(--font-editorial);
-  font-style: italic;
-  font-size: 1.15rem;
-  letter-spacing: 0.08em;
-  color: var(--deep-rose);
-}
-.resume-strip__underline {
-  position: absolute;
-  left: 50%;
-  bottom: 0;
-  width: 88%;
-  height: 1.5px;
-  background: var(--deep-rose);
-  transform: translateX(-50%) scaleX(0.35);
-  transform-origin: center;
-  transition: transform 0.4s var(--ease-editorial);
-}
-.resume-strip__btn:hover .resume-strip__underline {
-  transform: translateX(-50%) scaleX(1);
 }
 
 /* ============================================================
@@ -509,35 +494,35 @@ html {
   margin: 0 0 6px;
 }
 
-/* —— 简历 PDF 占位区（上传 resume.pdf 后替换为 <iframe>） —— */
-.modal__pdf-slot {
+.modal--resume {
+  width: min(640px, 100%);
+}
+
+/* —— 简历 PDF 预览 —— */
+.modal__pdf-frame {
+  display: block;
   margin-top: 14px;
-  min-height: 340px;
-  border: 1.5px dashed rgba(233, 154, 175, 0.5);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  padding: 40px 24px;
+  width: 100%;
+  height: 62vh;
+  border: 1px solid rgba(233, 154, 175, 0.4);
+  background: rgba(255, 255, 255, 0.04);
 }
 
-.modal__pdf-tag {
+.modal__pdf-link {
+  display: inline-block;
+  margin-top: 14px;
   font-family: var(--font-condensed);
-  font-size: 0.8rem;
-  letter-spacing: 0.36em;
+  font-size: 0.78rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
   color: var(--dusty-pink);
-  border: 1px solid rgba(233, 154, 175, 0.5);
-  padding: 8px 18px 8px 22px;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(233, 154, 175, 0.5);
+  padding-bottom: 2px;
+  transition: opacity 0.2s ease;
 }
-
-.modal__pdf-note {
-  margin: 0;
-  font-family: var(--font-editorial);
-  font-style: italic;
-  font-size: 1.15rem;
-  color: var(--paper-dim);
-  text-align: center;
+.modal__pdf-link:hover {
+  opacity: 0.7;
 }
 
 /* —— 联系方式行（领英 / 微信） —— */
@@ -655,12 +640,8 @@ a.contact-row:hover .contact-row__value {
   .nav__year {
     display: none;
   }
-
-  .resume-strip {
-    min-height: 56px;
-  }
-  .resume-strip__btn {
-    font-size: 1rem;
+  .nav__resume {
+    font-size: 1.05rem;
   }
 
   .works {
@@ -699,7 +680,7 @@ a.contact-row:hover .contact-row__value {
     padding: 40px 24px 32px;
   }
 
-  .modal__pdf-slot {
-    min-height: 260px;
+  .modal__pdf-frame {
+    height: 52vh;
   }
 }

@@ -42,6 +42,21 @@ const sections = [
           "/covers/pp.jpg",
         src: "https://res.cloudinary.com/jzfj58ji/video/upload/v1788945987/video-04.mp4",
       },
+      {
+        id: 3,
+        title: {
+          en: "CyberMeow · Illustration Motion PV",
+          zh: "CyberMeow · 插画动态 PV",
+        },
+        tags: {
+          en: "Motion PV / Visual Effects | AE | Character Animation · Puppet Animation · VFX · Motion Design",
+          zh: "Motion PV / 视觉特效 | AE | 人物动画 · 人偶动画 · 特效",
+        },
+        year: "2026",
+        poster:
+          "/covers/cm.png",
+        src: "https://res.cloudinary.com/jzfj58ji/video/upload/v1789109624/Pv_Prob4.mp4",
+      },
     ],
   },
   {
@@ -154,9 +169,8 @@ const reelLabel = {
 /* ==================== 联系方式（替换为真实信息） ==================== */
 const LINKEDIN_URL = "https://www.linkedin.com/in/your-profile"; // TODO: 替换为真实领英主页
 const WECHAT_ID = "your-wechat-id"; // TODO: 替换为真实微信号
-// 简历 PDF：把文件命名为 resume.pdf 放到 public/ 目录后，
-// 把简历弹窗里的占位区替换为 <iframe src="/resume.pdf" /> 或下载链接即可
-// const RESUME_PDF = "/resume.pdf";
+/* 简历 PDF：public/resume.pdf，弹窗内直接预览 */
+const RESUME_PDF = "/resume.pdf";
 
 /* ==================== 中英文案 ==================== */
 const t = {
@@ -167,7 +181,7 @@ const t = {
     footer: "More works coming soon",
     close: "Close",
     resumeTitle: "Résumé",
-    resumePdfNote: "Résumé PDF — coming soon",
+    downloadResume: "Download PDF",
     contactTitle: "Contact",
     contactLocation: "Remote worldwide",
   },
@@ -178,7 +192,7 @@ const t = {
     footer: "更多作品 即将更新",
     close: "关闭",
     resumeTitle: "简历",
-    resumePdfNote: "简历 PDF 即将上传",
+    downloadResume: "下载 PDF",
     contactTitle: "联系",
     contactLocation: "可远程协作",
   },
@@ -401,6 +415,13 @@ export default function Works() {
         </div>
 
         <div className="nav__right">
+          <button
+            type="button"
+            className="nav__resume"
+            onClick={() => setModal("resume")}
+          >
+            {tr.resume}
+          </button>
           <span className="nav__year">2026</span>
           <div className="nav__lang" aria-label="Language switch">
             <button
@@ -423,19 +444,6 @@ export default function Works() {
           </div>
         </div>
       </nav>
-
-      {/* ————— 粉色窄条：居中 RESUME / 简历（点击打开简历弹窗） ————— */}
-      <section className="resume-strip" aria-label="Resume">
-        <div className="resume-strip__halftone" aria-hidden="true" />
-        <button
-          type="button"
-          className="resume-strip__btn"
-          onClick={() => setModal("resume")}
-        >
-          <span className="resume-strip__btn-text">{tr.resume}</span>
-          <span className="resume-strip__underline" aria-hidden="true" />
-        </button>
-      </section>
 
       {/* ————— 炭灰 WORKS 区 ————— */}
       <section className="works" id="works">
@@ -516,12 +524,20 @@ export default function Works() {
 
             <p className="modal__kicker">{tr.resumeTitle}</p>
 
-            {/* PDF 上传占位区：把 resume.pdf 放进 public/ 后，
-                可将下方区块替换为 <iframe src="/resume.pdf" title="resume" /> */}
-            <div className="modal__pdf-slot">
-              <span className="modal__pdf-tag">PDF</span>
-              <p className="modal__pdf-note">{tr.resumePdfNote}</p>
-            </div>
+            {/* 简历 PDF：直接在弹窗内预览 */}
+            <iframe
+              className="modal__pdf-frame"
+              src={RESUME_PDF}
+              title={tr.resumeTitle}
+            />
+            <a
+              className="modal__pdf-link"
+              href={RESUME_PDF}
+              target="_blank"
+              rel="noreferrer"
+            >
+              {tr.downloadResume} ↗
+            </a>
           </div>
         </div>
       )}

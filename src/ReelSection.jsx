@@ -19,7 +19,7 @@ const DEFAULT_CHAPTERS = [
   {
     t: 0,
     en: "mograph",
-    zh: "动态",
+    zh: "排版",
     descEn: "Motion Graphics · Kinetic Typography · Visual Layout",
     descZh: "动态图形 · 动态排版 · 视觉构成",
   },
