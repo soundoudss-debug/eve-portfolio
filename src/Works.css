@@ -402,6 +402,18 @@ html {
   animation: worksTwinkle 2.4s ease-in-out infinite;
 }
 
+/* —— 版权免责声明 —— */
+.works__disclaimer {
+  margin: 6px 0 0;
+  max-width: 520px;
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-size: 0.72rem;
+  line-height: 1.7;
+  text-align: center;
+  color: rgba(241, 236, 229, 0.28);
+}
+
 @keyframes worksTwinkle {
   0%,
   100% {

@@ -10,7 +10,7 @@ import ReelSection from "./ReelSection.jsx";
 const sections = [
   {
     id: "game",
-    title: { en: "Game PV", zh: "游戏PV" },
+    title: { en: "Game content", zh: "游戏相关" },
     works: [
       {
         id: 1,
@@ -82,7 +82,7 @@ const sections = [
         id: 4,
         title: {
           en: "Notta AI Product Concept Promo",
-          zh: "Notta AI 产品概念宣传片(制作中...)",
+          zh: "Notta AI 产品概念宣传片",
         },
         tags: {
           en: "SaaS / Brand Commercial | PR + AE + AI | Ad concept · Live-action comp · Motion design · Product visual",
@@ -95,7 +95,7 @@ const sections = [
             "modern SaaS product commercial film still, AI transcription software interface floating above a clean desk, soft natural light, dusty pink and charcoal tech aesthetic, premium brand advertising mood, cinematic, subtle film grain, no readable text"
           ) +
           "&image_size=landscape_16_9",
-        src: "/videos/video-05.mp4",
+        src: "https://res.cloudinary.com/jzfj58ji/video/upload/v1789309302/Notta_Prob4.mp4",
       },
     ],
   },
@@ -179,6 +179,8 @@ const t = {
     navContact: "Contact",
     resume: "Resume",
     footer: "More works coming soon",
+    disclaimer:
+      "All videos are non-commercial re-edits for portfolio display only. Original footage & music belong to their respective owners. Contact me for removal.",
     close: "Close",
     resumeTitle: "Résumé",
     downloadResume: "Download PDF",
@@ -190,6 +192,8 @@ const t = {
     navContact: "联系",
     resume: "简历",
     footer: "更多作品 即将更新",
+    disclaimer:
+      "本作品集所有视频均为个人非商业剪辑再创作，仅用于作品展示；原始素材版权归各自权利人所有，如有侵权请联系删除。",
     close: "关闭",
     resumeTitle: "简历",
     downloadResume: "下载 PDF",
@@ -494,6 +498,7 @@ export default function Works() {
           <span className="works__foot-star" aria-hidden="true">
             ✦
           </span>
+          <p className="works__disclaimer">{tr.disclaimer}</p>
         </footer>
       </section>
 

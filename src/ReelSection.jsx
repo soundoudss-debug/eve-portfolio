@@ -57,7 +57,7 @@ const DEFAULT_CHAPTERS = [
 const copy = {
   en: {
     kicker: "Edit Reel — 2026",
-    title: "Style Reel · All-genre Edit Collection",
+    title: "collection",
     chapters: "Clips",
     play: "Play",
     pause: "Pause",
@@ -71,7 +71,7 @@ const copy = {
 
   zh: {
     kicker: "剪辑集锦 — 2026",
-    title: "风格速览 · 剪辑集锦",
+    title: "风格速览",
     chapters: "片段节点",
     play: "播放",
     pause: "暂停",
