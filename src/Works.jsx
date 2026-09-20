@@ -118,25 +118,25 @@ const sections = [
           "/covers/artdeco.jpe",
         src: "https://res.cloudinary.com/jzfj58ji/video/upload/v1788945980/video-06.mp4",
       },
-      {
-        id: 6,
-        title: {
-          en: "Solar System Educational Video",
-          zh: "Solar System 太阳系科普视频",
-        },
-        tags: {
-          en: "New Media Content | PR + CapCut | Info integration · Visual storytelling · Dynamic packaging · Long-form cut",
-          zh: "新媒体内容向 | PR + CapCut | 信息整合 · 视觉叙事 · 动态包装 · 长视频剪辑",
-        },
-        year: "2026",
-        poster:
-          "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=" +
-          encodeURIComponent(
-            "cinematic solar system educational film still, planets aligned in deep charcoal space, soft dusty pink glowing sun and nebula clouds, stars, clean documentary aesthetic, subtle film grain, no text"
-          ) +
-          "&image_size=landscape_16_9",
-        src: "https://res.cloudinary.com/jzfj58ji/video/upload/v1788945995/video-07.mp4",
-      },
+     {
+  id: 6,
+  title: {
+    en: "How Robots Learn to Walk",
+    zh: "机器人行走动力学研究",
+  },
+  tags: {
+    en: "Science Communication | PR + AE + CapCut | Motion Graphics · Data Visualization · Visual Storytelling · AI Asset Processing",
+    zh: "数码科普视频 | PR + AE + 剪映 | 动效包装 · 信息可视化 · 视觉叙事 · AI素材处理",
+  },
+  year: "2026",
+  poster:
+    "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=" +
+    encodeURIComponent(
+      "high-end technology documentary thumbnail about legged robot locomotion and dynamic balance, quadruped robot running in a dark modern laboratory, elegant mechanical leg structure, glowing trajectory lines showing center of mass and spring-loaded inverted pendulum motion, subtle scientific diagrams and dynamic motion paths, deep charcoal and graphite background, restrained electric blue and soft warm orange accents, sophisticated YouTube science documentary aesthetic, cinematic lighting, realistic robotics, premium motion graphics style, clean composition, no text, no logo, no watermark"
+    ) +
+    "&image_size=landscape_16_9",
+  src: "https://res.cloudinary.com/jzfj58ji/video/upload/v1789875937/%E9%99%88%E4%BC%8A%E5%A9%B7-%E6%B5%8B%E8%AF%951_%E5%8E%8B%E7%BC%A9.mp4",
+},
       {
         id: 7,
         title: {
