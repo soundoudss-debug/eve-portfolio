@@ -26,22 +26,36 @@ const sections = [
         poster:
           "/covers/valorant.jpe",
         src: "https://res.cloudinary.com/jzfj58ji/video/upload/v1788945989/video-02.mp4",
-      },
-      {
-        id: 2,
-        title: {
-          en: "PinkPantheress · Illegal Motion Visual",
-          zh: "PinkPantheress · Illegal 动效视觉",
-        },
-        tags: {
-          en: "Music Visual / Mograph | AE | 3D camera · Kinetic type · Retro visual · Motion Design",
-          zh: "Music Visual / Mograph | AE | 3D运镜 · 动态排版 · 复古视觉 · Motion Design",
-        },
-        year: "2026",
-        poster:
-          "/covers/pp.jpg",
-        src: "https://res.cloudinary.com/jzfj58ji/video/upload/v1788945987/video-04.mp4",
-      },
+      }, 
+     {
+    id: 2,
+    title: {
+        en: "Genshin Impact · Chiori Character PV edit",
+        zh: "原神 · 千织 角色 AMV",
+    },
+    tags: {
+        en: "Character PV / Shot Reconstruction | AE Compositing | Rhythm Editing | Narrative Redesign",
+        zh: "角色PV /  镜头重构 · AE二次合成 · 音画卡点",
+    },
+    year: "2026",
+    poster: "/covers/chiori.png",
+    src: "https://res.cloudinary.com/jzfj58ji/video/upload/v1790241518/Chiori_%E5%8E%8B%E7%BC%A9.mp4",
+},
+{
+    id: 6,
+    title: {
+        en: "Gacha PV Practice · Character Unlock Animation",
+        zh: "游戏PV训练 · 角色解锁动画",
+    },
+    tags: {
+        en: "Game PV / Gacha Animation | Character Reveal | AE Compositing | Motion Packaging | Camera Animation",
+        zh: "游戏PV / 角色登场 | AE合成 | 后期包装 | 摄像机动画",
+    },
+    year: "2026",
+    poster: "/covers/prac.png",
+    src: "https://res.cloudinary.com/jzfj58ji/video/upload/v1790235422/%E5%90%88%E6%88%90_1.mp4",
+},
+
       {
         id: 3,
         title: {
@@ -49,8 +63,8 @@ const sections = [
           zh: "CyberMeow · 插画动态 PV",
         },
         tags: {
-          en: "Motion PV / Visual Effects | AE | Character Animation · Puppet Animation · VFX · Motion Design",
-          zh: "Motion PV / 视觉特效 | AE | 人物动画 · 人偶动画 · 特效",
+          en: "Motion PV / Visual Effects | AE | Character Animation · Puppet Animation · Motion Visual ",
+          zh: "Motion PV / 视觉特效 | AE | 人物动画 · 人偶动画 · 动效视觉 ",
         },
         year: "2026",
         poster:
