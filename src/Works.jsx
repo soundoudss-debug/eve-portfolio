@@ -27,29 +27,45 @@ const sections = [
           "/covers/valorant.jpe",
         src: "https://res.cloudinary.com/jzfj58ji/video/upload/v1788945989/video-02.mp4",
       }, 
-     {
+      {
     id: 2,
     title: {
         en: "Genshin Impact · Chiori Character PV edit",
-        zh: "原神 · 千织 角色 AMV",
+        zh: "原神 · 千织 角色 PV",
     },
     tags: {
-        en: "Character PV / Shot Reconstruction | AE Compositing | Rhythm Editing | Narrative Redesign",
-        zh: "角色PV /  镜头重构 · AE二次合成 · 音画卡点",
+        en: "Character PV / Shot Reconstruction· AE Compositing · Rhythm Editing · Narrative Redesign",
+        zh: "角色PV /  角色气质 · AE二次合成 · 音画卡点",
     },
     year: "2026",
     poster: "/covers/chiori.png",
-    src: "https://res.cloudinary.com/jzfj58ji/video/upload/v1790241518/Chiori_%E5%8E%8B%E7%BC%A9.mp4",
+    src: "https://res.cloudinary.com/jzfj58ji/video/upload/v1790935244/%E6%B5%8B%E8%AF%95%E5%B1%95%E7%A4%BA_%E8%A7%86%E9%A2%91%E8%AE%BE%E8%AE%A1_%E5%90%8E%E6%9C%9F%E5%88%B6%E4%BD%9C_-%E9%99%88%E4%BC%8A%E5%A9%B7_%E5%8E%8B%E7%BC%A9.mp4",
 },
+       {
+        id: 3,
+        title: {
+          en: "PinkPantheress · Illegal Motion Visual",
+          zh: "PinkPantheress · Illegal 动效视觉",
+        },
+        tags: {
+          en: "Music Visual / Mograph | AE | 3D camera · Kinetic type · Retro visual · Motion Design",
+          zh: "Music Visual / Mograph | AE | 3D运镜 · 动态排版 · 复古视觉 · Motion Design",
+        },
+        year: "2026",
+        poster:
+          "/covers/pp.jpg",
+        src: "https://res.cloudinary.com/jzfj58ji/video/upload/v1788945987/video-04.mp4",
+      },
+     
 {
-    id: 6,
+    id: 4,
     title: {
         en: "Gacha PV Practice · Character Unlock Animation",
         zh: "游戏PV训练 · 角色解锁动画",
     },
     tags: {
-        en: "Game PV / Gacha Animation | Character Reveal | AE Compositing | Motion Packaging | Camera Animation",
-        zh: "游戏PV / 角色登场 | AE合成 | 后期包装 | 摄像机动画",
+        en: "Game PV / Gacha Animation · Character Reveal · AE Compositing ·  Motion Packaging · Camera Animation",
+        zh: "游戏PV / 角色登场· AE合成· 后期包装 · 摄像机动画",
     },
     year: "2026",
     poster: "/covers/prac.png",
@@ -57,7 +73,7 @@ const sections = [
 },
 
       {
-        id: 3,
+        id: 5,
         title: {
           en: "CyberMeow · Illustration Motion PV",
           zh: "CyberMeow · 插画动态 PV",
@@ -78,7 +94,7 @@ const sections = [
     title: { en: "Brand & Commercial", zh: "品牌商业" },
     works: [
       {
-        id: 3,
+        id: 6,
         title: {
           en: "Vivienne Westwood Bridal 2022 Fashion Promo",
           zh: "Vivienne Westwood Bridal 2022 时尚宣传片",
@@ -93,7 +109,7 @@ const sections = [
         src: "https://res.cloudinary.com/jzfj58ji/video/upload/v1788945965/video-01.mp4",
       },
       {
-        id: 4,
+        id: 7,
         title: {
           en: "Notta AI Product Concept Promo",
           zh: "Notta AI 产品概念宣传片",
@@ -118,7 +134,7 @@ const sections = [
     title: { en: "New Media", zh: "新媒体内容" },
     works: [
       {
-        id: 5,
+        id: 8,
         title: {
           en: "Art Deco English Educational Visual",
           zh: "Art Deco 英文科普视觉",
@@ -133,7 +149,7 @@ const sections = [
         src: "https://res.cloudinary.com/jzfj58ji/video/upload/v1788945980/video-06.mp4",
       },
      {
-  id: 6,
+  id: 9,
   title: {
     en: "How Robots Learn to Walk",
     zh: "机器人行走动力学研究",
@@ -152,7 +168,7 @@ const sections = [
   src: "https://res.cloudinary.com/jzfj58ji/video/upload/v1789875937/%E9%99%88%E4%BC%8A%E5%A9%B7-%E6%B5%8B%E8%AF%951_%E5%8E%8B%E7%BC%A9.mp4",
 },
       {
-        id: 7,
+        id: 10,
         title: {
           en: "fashion Vlog Design",
           zh: "Vlog 开头设计",
